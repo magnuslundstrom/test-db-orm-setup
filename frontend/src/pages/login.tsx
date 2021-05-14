@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/layout/Layout';
 import { StyledAuthForm } from '@components/forms/StyledAuthForm';
 import { StyledButton } from '@components/buttons/StyledButton';
+import { loginResponse } from '@utils/types/loginResponse';
+import { useRouter } from 'next/router';
 
-export default function SignUp() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { onLogin } = useUser();
 
+  const router = useRouter();
   const onSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -18,25 +23,24 @@ export default function SignUp() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_API_HOST}/sign-up`, {
-          email,
-          password,
-        })
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (e) {
-      console.log(e);
+
+    const res = await axios.post<loginResponse>(`${process.env.NEXT_PUBLIC_API_HOST}/login`, {
+      email,
+      password,
+    });
+    if (res.status === 200) {
+      const { user, jwt } = res.data;
+      onLogin(user, jwt);
+      return router.push('/dashboard');
     }
   };
+
   return (
-    <Layout title="Sign up">
+    <Layout title="Login">
       <StyledAuthForm onSubmit={onSubmit}>
         <input type="text" placeholder="Email" value={email} onChange={onSetEmail} />
         <input type="password" placeholder="Password" value={password} onChange={onSetPassword} />
-        <StyledButton>Sign up</StyledButton>
+        <StyledButton>Login</StyledButton>
       </StyledAuthForm>
     </Layout>
   );
