@@ -6,6 +6,7 @@ export const StyledHeader = styled.div`
   padding: ${spacing.lg};
   display: flex;
   justify-content: space-between;
+  width: 100%;
   a {
     color: ${colors.white};
     text-decoration: none;

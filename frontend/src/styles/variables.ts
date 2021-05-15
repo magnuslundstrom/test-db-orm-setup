@@ -19,6 +19,8 @@ export const colors = {
 
   // orange
   orange400: '#fa7a5b',
+
+  darkBg: '#0d1117',
 };
 
 export const rounded = {
