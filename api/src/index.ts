@@ -9,7 +9,8 @@ import jwt from 'jsonwebtoken';
 import { secret } from './config';
 
 import { createConnection } from 'typeorm';
-import { User } from './entity/User';
+import { User, Group } from './entity';
+import { authentication } from './middleware/authentication';
 
 type RequestWithBody<T extends { [key: string]: any }> = Request<{}, {}, T>;
 type SignUpProperties = 'firstName' | 'lastName' | 'age' | 'password' | 'email';
@@ -27,7 +28,6 @@ createConnection()
     app.post(
       '/sign-up',
       (req: RequestWithBody<UnionToInterface<SignUpProperties, string>>, res) => {
-        console.log(req.body);
         const { email, firstName, lastName, age, password } = req.body;
         const repository = connection.getRepository(User);
         const user = new User();
@@ -60,15 +60,39 @@ createConnection()
     );
 
     app.post('/attempt-login', async (req: RequestWithBody<{ jwt: string }>, res: Response) => {
-      console.log(req.body);
       const { jwt: reqJwt } = req.body;
       jwt.verify(reqJwt, secret, (err, user) => {
         if (err) return res.status(403).send();
         res.send(user);
       });
     });
-  })
 
+    app.post(
+      '/new-group',
+      authentication,
+      async (req: RequestWithBody<{ title: string; subject: string }>, res: Response) => {
+        const { title, subject } = req.body;
+        const repo = connection.getRepository(Group);
+        const group = new Group();
+        group.title = title;
+        group.subject = subject;
+        repo
+          .save(group)
+          .then((data) => {
+            console.log(data);
+            return res.status(201).send('Success');
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(404).send('Something went wrong');
+          });
+      }
+    );
+
+    app.get('/dashboard', (req: Request, res: Response) => {
+      res.send('hej');
+    });
+  })
   .catch((error) => console.log(error));
 
 app.listen(3080, () => {

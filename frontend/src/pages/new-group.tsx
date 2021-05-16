@@ -24,7 +24,7 @@ export default function NewGroup() {
     e.preventDefault();
     const postData = JSON.stringify({ title, subject });
     authenticatedRequest(jwt)
-      .post(postData)
+      .post(`${process.env.NEXT_PUBLIC_API_HOST}/new-group`, postData)
       .then((data) => {
         console.log(data);
       })

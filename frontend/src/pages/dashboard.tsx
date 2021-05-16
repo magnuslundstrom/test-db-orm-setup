@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { Layout } from '@components/global/layout/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
@@ -26,3 +27,11 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context.req.cookies);
+
+  return {
+    props: {},
+  };
+};
