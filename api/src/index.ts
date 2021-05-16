@@ -39,6 +39,17 @@ createConnection()
         repository.save(user);
       }
     );
+
+    app.get('/dashboard', async (req: Request, res: Response) => {
+      const repo = connection.getRepository(Group);
+      const groups = await repo.find({
+        order: {
+          id: 'DESC',
+        },
+      });
+      res.status(200).send(groups);
+    });
+
     app.post(
       '/login',
       async (req: RequestWithBody<{ email: string; password: string }>, res: Response) => {
@@ -61,6 +72,7 @@ createConnection()
 
     app.post('/attempt-login', async (req: RequestWithBody<{ jwt: string }>, res: Response) => {
       const { jwt: reqJwt } = req.body;
+      console.log('attempt-login-api');
       jwt.verify(reqJwt, secret, (err, user) => {
         if (err) return res.status(403).send();
         res.send(user);
@@ -88,10 +100,6 @@ createConnection()
           });
       }
     );
-
-    app.get('/dashboard', (req: Request, res: Response) => {
-      res.send('hej');
-    });
   })
   .catch((error) => console.log(error));
 

@@ -16,6 +16,7 @@ export const colors = {
   // gray
   gray100: '#edf1f4',
   gray400: '#bcbcbc',
+  gray800: '#35465a',
 
   // orange
   orange400: '#fa7a5b',

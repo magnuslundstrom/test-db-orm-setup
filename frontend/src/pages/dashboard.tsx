@@ -1,37 +1,31 @@
-import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import React from 'react';
+import { InferGetServerSidePropsType } from 'next';
+import axios from 'axios';
 import { Layout } from '@components/global/layout/Layout';
 import { useUser } from '@hooks/useUser';
-import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
+import { groups } from '@utils/types/Group';
+import { GroupList } from '@components/groups/GroupList';
 
-interface State {
-  title: string;
-}
-
-export default function Dashboard() {
-  const [state, setState] = useState<State>({
-    title: '',
-  });
-
+const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { user } = useUser();
 
-  const factory = onChangeFactory(state, setState);
-  const onTitleChange = factory('title');
   return (
     <Layout title="Dashboard">
       <h1>
         Welcome to StudyPartnr {user?.firstName} {user?.lastName}
       </h1>
-      <p>Here will be a list of your upcoming classes</p>
+      <GroupList groups={groups} title="Newest groups" />
       <p>There will be a list of potential new classes that you could take</p>
     </Layout>
   );
-}
+};
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.req.cookies);
+export async function getServerSideProps() {
+  const res = await axios.get<groups>('http://api:3080/dashboard');
 
   return {
-    props: {},
+    props: { groups: res.data },
   };
-};
+}
+
+export default Dashboard;
