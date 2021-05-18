@@ -1,26 +1,27 @@
 import { useState, useEffect } from 'react';
+import { getCookie } from '@utils/helperFunctions/getCookie';
 
-type JWT = string;
+const JWT_KEY = 'JWT';
 
 export const useJwt = () => {
-  const [jwt, setJwt] = useState<JWT>('');
+  const [jwt, setJwt] = useState<string>('');
 
   useEffect(() => {
     retrieveJwt();
   }, []);
 
-  const onSetJwt = (jwt: JWT) => {
-    window.localStorage.setItem('jwt', jwt);
+  const onSetJwt = (jwt: string) => {
+    document.cookie = `${JWT_KEY}=${jwt}`;
     setJwt(jwt);
   };
 
   const onRemoveJwt = () => {
-    window.localStorage.removeItem('jwt');
+    document.cookie = `${JWT_KEY}=""`;
     setJwt('');
   };
 
   const retrieveJwt = () => {
-    const windowJwt = window.localStorage.getItem('jwt') || '';
+    const windowJwt = getCookie(JWT_KEY) || '';
     setJwt(windowJwt);
   };
 

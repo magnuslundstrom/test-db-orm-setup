@@ -1,5 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+type createNewUserProps = Pick<User, 'firstName' | 'lastName' | 'age' | 'email' | 'password'>;
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -22,4 +24,14 @@ export class User {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
+
+  public static createNewInstance(props: createNewUserProps) {
+    const user = new User();
+    user.firstName = props.firstName;
+    user.lastName = props.lastName;
+    user.age = props.age;
+    user.email = props.email;
+    user.password = props.password;
+    return user;
+  }
 }

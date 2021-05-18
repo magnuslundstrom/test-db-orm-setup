@@ -1,6 +1,6 @@
 import React from 'react';
-import { InferGetServerSidePropsType } from 'next';
-import axios from 'axios';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
 import { Layout } from '@components/global/layout/Layout';
 import { useUser } from '@hooks/useUser';
 import { groups } from '@utils/types/Group';
@@ -20,12 +20,22 @@ const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideP
   );
 };
 
-export async function getServerSideProps() {
-  const res = await axios.get<groups>('http://api:3080/dashboard');
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const authToken = context.req.cookies['JWT'] || '';
+  try {
+    const res = await authenticatedRequest(authToken).get<groups>('http://api:3080/dashboard');
 
-  return {
-    props: { groups: res.data },
-  };
+    return {
+      props: { groups: res.data },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 }
 
 export default Dashboard;
