@@ -17,7 +17,7 @@ export default (router: Router, connection: Connection) => {
       await repository.save(user);
       res.send(201);
     } catch (err) {
-      console.log('Something went wrong in the sign-up route');
+      console.log(err);
       res.status(404).send('Something went wrong');
     }
   });

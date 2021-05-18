@@ -12,6 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
+export default app;
+
 // createConnection()
 //   .then(async (connection) => {
 //     app.get('/dashboard', authentication, async (req: Request, res: Response) => {
@@ -47,6 +49,8 @@ app.use(router);
 //   })
 //   .catch((error) => console.log(error));
 
-app.listen(3080, () => {
-  console.log('listening on port 3080');
-});
+if (!process.env.TEST) {
+  app.listen(3080, () => {
+    console.log('listening on port 3080');
+  });
+}
