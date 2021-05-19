@@ -1,13 +1,23 @@
 import request from 'supertest';
-import app from '../../../server';
+import TestSetup from '../../testSetup';
+
+const testSetup = new TestSetup();
+
+beforeEach(async () => {
+  await testSetup.start();
+});
+
+afterEach(() => {
+  testSetup.closeConnection();
+});
 
 test('Sign up user', async () => {
-  await request(app)
+  await request(testSetup.app)
     .post('/sign-up')
     .send({
       firstName: 'james',
       lastName: 'siguard',
-      email: 'a@a.dk',
+      email: 'aa@aa.dk',
       password: '123',
       age: '14',
     })

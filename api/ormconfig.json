@@ -1,18 +1,13 @@
 {
   "type": "mysql",
   "host": "db",
-  "port": "3306",
+  "port": 3306,
   "username": "root",
   "password": "james",
   "database": "bank",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/model/**/!(*.test.ts)"],
+  "entities": ["src/entity/**/!(*.test.ts)"],
   "migrations": ["src/migration/**/*.ts"],
-  "subscribers": ["src/subscriber/**/*.ts"],
-  "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
-  }
+  "subscribers": ["src/subscriber/**/*.ts"]
 }

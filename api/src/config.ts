@@ -1,3 +1,10 @@
-// REMOVE THIS LATER AND REPLACE WITH ENV VARS PLS
-
 export const secret = 'asdf';
+
+// export const testConnection = createConnection({
+//   type: 'sqlite',
+//   database: ':memory:',
+//   dropSchema: true,
+//   entities: [Group, User],
+//   synchronize: true,
+//   logging: false,
+// });

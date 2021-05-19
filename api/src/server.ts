@@ -3,16 +3,24 @@ DIS FILE NEEDS MASSIVE CLEANUP. PRIMARY FOCUS ON FRONTEND APPLICATION FOR NOW.
 */
 
 import 'reflect-metadata';
-import express from 'express';
-import cors from 'cors';
-import router from './routes/rootRouter';
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+import { Router } from 'express';
+import { createConnection } from 'typeorm';
+import app from './app';
+import { allRoutes } from './routes/allRoutes';
+
+const router = Router();
+
+createConnection().then((connection) => {
+  allRoutes.forEach((route) => {
+    route(router, connection);
+  });
+});
+
 app.use(router);
 
-export default app;
+app.listen(3080, () => {
+  console.log('listening on port 3080');
+});
 
 // createConnection()
 //   .then(async (connection) => {
@@ -48,9 +56,3 @@ export default app;
 //     );
 //   })
 //   .catch((error) => console.log(error));
-
-if (!process.env.TEST) {
-  app.listen(3080, () => {
-    console.log('listening on port 3080');
-  });
-}
