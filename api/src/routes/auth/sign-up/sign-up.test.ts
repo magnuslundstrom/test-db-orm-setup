@@ -1,14 +1,10 @@
 import request from 'supertest';
-import TestSetup from '../../testSetup';
+import TestSetup from '../../../testSetup';
 
 const testSetup = new TestSetup();
 
 beforeEach(async () => {
   await testSetup.start();
-});
-
-afterEach(() => {
-  testSetup.closeConnection();
 });
 
 test('Sign up user', async () => {
@@ -22,4 +18,8 @@ test('Sign up user', async () => {
       age: '14',
     })
     .expect(201);
+});
+
+afterEach(async () => {
+  await testSetup.closeConnection();
 });

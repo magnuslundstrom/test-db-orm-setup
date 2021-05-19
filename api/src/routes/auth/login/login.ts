@@ -1,8 +1,19 @@
 import { Router, Response } from 'express';
 import { Connection } from 'typeorm';
 import jwt from 'jsonwebtoken';
-import { secret } from '../../config';
-import { User } from '../../entity/User';
+import { secret } from '../../../config';
+import { User } from '../../../entity/user/User';
+
+export class LoginFunctionality {
+  static signJwt(user: User) {
+    return jwt.sign(
+      {
+        ...user,
+      },
+      secret
+    );
+  }
+}
 
 export default (router: Router, connection: Connection) => {
   router.post(
@@ -13,18 +24,13 @@ export default (router: Router, connection: Connection) => {
         const repository = connection.getRepository(User);
         const user = await repository.findOne({ email, password });
         delete user.password;
-        const newJwt = jwt.sign(
-          {
-            ...user,
-          },
-          secret
-        );
+        const newJwt = LoginFunctionality.signJwt(user);
         if (user) {
           return res.status(200).send({ user, jwt: newJwt });
         }
         return res.status(400).send('No user with these credentials.');
       } catch (err) {
-        console.log('error');
+        console.log('Error in login route');
         res.status(404).send('No user with those creds my friend');
       }
     }

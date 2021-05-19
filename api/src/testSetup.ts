@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import app from '../app';
-import { allRoutes } from '../routes/allRoutes';
+import app from './app';
+import { allRoutes } from './routes/allRoutes';
 import { Connection, createConnection, getConnection } from 'typeorm';
 
 /** TestSetup class will make it easy to make a connection and setup test routes in beforeEach calls */
 class TestSetup {
   app = app;
   private router: Router | null = null;
-  private connection: Connection | null = null;
+  connection: Connection | null = null;
 
   async start() {
     await this.createTestConnection();
@@ -46,8 +46,8 @@ class TestSetup {
     this.connection = connection;
   }
 
-  closeConnection() {
-    getConnection('test').close();
+  async closeConnection() {
+    await getConnection('test').close();
   }
 }
 
