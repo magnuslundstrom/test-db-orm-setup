@@ -4,16 +4,9 @@ import jwt from 'jsonwebtoken';
 import { secret } from '../../../config';
 import { User } from '../../../entity/user/User';
 
-export class LoginFunctionality {
-  static signJwt(user: User) {
-    return jwt.sign(
-      {
-        ...user,
-      },
-      secret
-    );
-  }
-}
+export const signJwt = (user: User) => {
+  return jwt.sign({ ...user }, secret);
+};
 
 export default (router: Router, connection: Connection) => {
   router.post(
@@ -23,15 +16,19 @@ export default (router: Router, connection: Connection) => {
         const { email, password } = req.body;
         const repository = connection.getRepository(User);
         const user = await repository.findOne({ email, password });
-        delete user.password;
-        const newJwt = LoginFunctionality.signJwt(user);
         if (user) {
-          return res.status(200).send({ user, jwt: newJwt });
+          delete user.password;
+          const newJwt = signJwt(user);
+          return res.status(200).json({ user, jwt: newJwt });
+        } else {
+          return res.status(400).json({
+            message: 'No user with these creds',
+          });
         }
-        return res.status(400).send('No user with these credentials.');
       } catch (err) {
-        console.log('Error in login route');
-        res.status(404).send('No user with those creds my friend');
+        return res.status(400).send({
+          message: 'Something went horribly wrong',
+        });
       }
     }
   );

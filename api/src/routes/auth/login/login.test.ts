@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { User } from '../../../entity';
 import TestSetup from '../../../testSetup';
-import { LoginFunctionality } from './login';
+import { signJwt } from './login';
 const testSetup = new TestSetup();
 
 beforeAll(async () => {
@@ -17,7 +17,11 @@ beforeAll(async () => {
   await repo.save(user);
 });
 
-describe('Testing user login function', () => {
+afterAll(async () => {
+  await testSetup.closeConnection();
+});
+
+describe('Test Login', () => {
   test('Should login existing user', async () => {
     const res = await request(testSetup.app)
       .post('/login')
@@ -31,7 +35,7 @@ describe('Testing user login function', () => {
       body: { jwt, user },
     } = res;
 
-    const generateJwtToAssert = LoginFunctionality.signJwt(user);
+    const generateJwtToAssert = signJwt(user);
     expect(jwt).toBe(generateJwtToAssert);
     expect(user.firstName).toBe('Kaj');
     expect(user.lastName).toBe('Larsen');
@@ -39,13 +43,9 @@ describe('Testing user login function', () => {
   });
 
   test('Should not login existing user', async () => {
-    await request(testSetup.app)
+    const res = await request(testSetup.app)
       .post('/login')
       .send({ email: 'a@a.dk', password: 'abx' })
-      .expect(404);
+      .expect(400);
   });
-});
-
-afterAll(async () => {
-  await testSetup.closeConnection();
 });

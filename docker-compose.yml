@@ -39,6 +39,7 @@ services:
       - ./api:/usr/src/app/api
     depends_on:
       - db
+      - test_db
 
   frontend:
     build: ${PWD}/frontend/.

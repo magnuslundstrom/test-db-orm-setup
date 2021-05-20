@@ -37,6 +37,7 @@ class TestSetup {
       database: 'test',
       type: 'mysql',
       synchronize: true,
+      migrationsRun: false,
       dropSchema: true,
       logging: false,
       entities: ['src/entity/**/!(*.test.ts)'],
@@ -47,7 +48,7 @@ class TestSetup {
   }
 
   async closeConnection() {
-    await getConnection('test').close();
+    await this.connection.close();
   }
 }
 

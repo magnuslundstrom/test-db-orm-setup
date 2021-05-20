@@ -13,5 +13,6 @@
     "paths": {
       "*": ["types/*.d.ts"]
     }
-  }
+  },
+  "include": ["./src/**/*"]
 }

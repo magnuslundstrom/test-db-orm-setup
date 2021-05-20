@@ -23,16 +23,6 @@ app.listen(3080, () => {
 });
 
 // createConnection()
-//   .then(async (connection) => {
-//     app.get('/dashboard', authentication, async (req: Request, res: Response) => {
-//       const repo = connection.getRepository(Group);
-//       const groups = await repo.find({
-//         order: {
-//           id: 'DESC',
-//         },
-//       });
-//       res.status(200).send(groups);
-//     });
 
 //     app.post(
 //       '/new-group',
