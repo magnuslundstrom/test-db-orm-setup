@@ -25,4 +25,6 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
   }
   async instatiateAll() {}
   // MAKE INSTANTIATEMULTIPLEUSERS
+
+  getValidJwt() {}
 }

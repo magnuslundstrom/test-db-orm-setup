@@ -3,6 +3,7 @@ import app from '../app';
 import { allRoutes } from '../routes/allRoutes';
 import { Connection, createConnection, getConnection } from 'typeorm';
 import { UserSetup } from './userSetup/userSetup';
+import { GroupSetup } from './groupSetup/groupSetup';
 
 /** TestSetup class will make it easy to make a connection and setup test routes in beforeEach calls */
 class TestSetup {
@@ -10,12 +11,13 @@ class TestSetup {
   private router: Router | null = null;
   connection: Connection | null = null;
   userSetup: UserSetup | null = null;
-
+  groupSetup: GroupSetup | null = null;
   async start() {
     await this.createTestConnection();
     this.setupRouter();
     this.consumeRouter();
     this.userSetup = new UserSetup(this.connection);
+    this.groupSetup = new GroupSetup(this.connection);
   }
 
   private setupRouter() {

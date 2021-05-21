@@ -11,7 +11,15 @@ export class GroupSetup extends BaseSetupAbstract<{ title: string; subject: stri
   }
   data = groupData;
 
-  public async instantiateOne() {}
+  public async instantiateOne() {
+    const { title, subject } = groupData[0];
+    const repo = this.connection.getRepository(Group);
+    const group = Group.createNewInstance({
+      title,
+      subject,
+    });
 
+    await repo.save(group);
+  }
   public async instatiateAll() {}
 }
