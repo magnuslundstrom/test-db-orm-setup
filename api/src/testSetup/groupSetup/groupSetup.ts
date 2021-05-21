@@ -3,7 +3,7 @@ import { BaseSetupAbstract } from '../../testSetup/BaseSetupAbstract';
 import { Group } from '../../entity';
 import { groupData } from './groupData';
 
-export class GroupSetup extends BaseSetupAbstract<{ title: string; subject: string }> {
+export class GroupSetup extends BaseSetupAbstract<typeof groupData[0]> {
   protected connection: Connection | null;
   constructor(connection: Connection | null) {
     super();
