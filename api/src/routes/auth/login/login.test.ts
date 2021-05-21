@@ -1,20 +1,11 @@
 import request from 'supertest';
-import { User } from '../../../entity';
-import TestSetup from '../../../testSetup';
+import TestSetup from '../../../testSetup/testSetup';
 import { signJwt } from './login';
 const testSetup = new TestSetup();
 
 beforeAll(async () => {
   await testSetup.start();
-  const repo = testSetup.connection.getRepository(User);
-  const user = User.createNewInstance({
-    age: 13,
-    firstName: 'Kaj',
-    lastName: 'Larsen',
-    email: 'K@K.dk',
-    password: 'abc',
-  });
-  await repo.save(user);
+  await testSetup.userSetup.instantiateOne();
 });
 
 afterAll(async () => {
@@ -43,7 +34,7 @@ describe('Test Login', () => {
   });
 
   test('Should not login existing user', async () => {
-    const res = await request(testSetup.app)
+    await request(testSetup.app)
       .post('/login')
       .send({ email: 'a@a.dk', password: 'abx' })
       .expect(400);

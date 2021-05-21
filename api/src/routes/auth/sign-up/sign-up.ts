@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Connection } from 'typeorm';
 import { User } from '../../../entity/user/User';
+
 interface SignUpProperties {
   firstName: string;
   lastName: string;

@@ -1,18 +1,21 @@
 import { Router } from 'express';
-import app from './app';
-import { allRoutes } from './routes/allRoutes';
+import app from '../app';
+import { allRoutes } from '../routes/allRoutes';
 import { Connection, createConnection, getConnection } from 'typeorm';
+import { UserSetup } from './userSetup/userSetup';
 
 /** TestSetup class will make it easy to make a connection and setup test routes in beforeEach calls */
 class TestSetup {
   app = app;
   private router: Router | null = null;
   connection: Connection | null = null;
+  userSetup: UserSetup | null = null;
 
   async start() {
     await this.createTestConnection();
     this.setupRouter();
     this.consumeRouter();
+    this.userSetup = new UserSetup(this.connection);
   }
 
   private setupRouter() {
@@ -38,7 +41,6 @@ class TestSetup {
       type: 'mysql',
       synchronize: true,
       migrationsRun: false,
-      dropSchema: true,
       logging: false,
       entities: ['src/entity/**/!(*.test.ts)'],
       migrations: ['src/migration/**/*.ts'],
@@ -48,7 +50,9 @@ class TestSetup {
   }
 
   async closeConnection() {
-    await this.connection.close();
+    if (this.connection) {
+      await this.connection.close();
+    }
   }
 }
 

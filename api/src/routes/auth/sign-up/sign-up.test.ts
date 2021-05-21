@@ -1,25 +1,27 @@
 import request from 'supertest';
-import TestSetup from '../../../testSetup';
+import TestSetup from '../../../testSetup/testSetup';
 
 const testSetup = new TestSetup();
 
-beforeEach(async () => {
+beforeAll(async () => {
   await testSetup.start();
 });
 
-test('Sign up user', async () => {
-  await request(testSetup.app)
-    .post('/sign-up')
-    .send({
-      firstName: 'james',
-      lastName: 'siguard',
-      email: 'aa@aa.dk',
-      password: '123',
-      age: '14',
-    })
-    .expect(201);
+afterAll(async () => {
+  await testSetup.closeConnection();
 });
 
-afterEach(async () => {
-  await testSetup.closeConnection();
+describe('Sign up tests', () => {
+  test('Sign up user', async () => {
+    await request(testSetup.app)
+      .post('/sign-up')
+      .send({
+        firstName: 'james',
+        lastName: 'siguard',
+        email: 'aa@aa.dk',
+        password: '123',
+        age: '14',
+      })
+      .expect(201);
+  });
 });

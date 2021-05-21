@@ -1,4 +1,3 @@
 import authRoutes from './auth';
-import dashboard from './dashboard/dashboard';
-
-export const allRoutes = [...authRoutes, dashboard];
+import groupRoutes from './groups';
+export const allRoutes = [...authRoutes, ...groupRoutes];

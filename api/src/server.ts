@@ -1,7 +1,3 @@
-/*
-DIS FILE NEEDS MASSIVE CLEANUP. PRIMARY FOCUS ON FRONTEND APPLICATION FOR NOW.
-*/
-
 import 'reflect-metadata';
 import { Router } from 'express';
 import { createConnection } from 'typeorm';
@@ -21,28 +17,3 @@ app.use(router);
 app.listen(3080, () => {
   console.log('listening on port 3080');
 });
-
-// createConnection()
-
-//     app.post(
-//       '/new-group',
-//       authentication,
-//       async (req: RequestWithBody<{ title: string; subject: string }>, res: Response) => {
-//         const { title, subject } = req.body;
-//         const repo = connection.getRepository(Group);
-//         const group = new Group();
-//         group.title = title;
-//         group.subject = subject;
-//         repo
-//           .save(group)
-//           .then((data) => {
-//             return res.status(201).send('Success');
-//           })
-//           .catch((err) => {
-//             console.log(err);
-//             return res.status(404).send('Something went wrong');
-//           });
-//       }
-//     );
-//   })
-//   .catch((error) => console.log(error));

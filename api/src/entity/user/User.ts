@@ -25,13 +25,19 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
-  public static createNewInstance(props: createNewUserProps) {
+  public static createNewInstance({
+    firstName,
+    lastName,
+    age,
+    email,
+    password,
+  }: createNewUserProps) {
     const user = new User();
-    user.firstName = props.firstName;
-    user.lastName = props.lastName;
-    user.age = props.age;
-    user.email = props.email;
-    user.password = props.password;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.age = age;
+    user.email = email;
+    user.password = password;
     return user;
   }
 }
