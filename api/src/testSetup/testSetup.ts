@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import app from '../app';
 import { allRoutes } from '../routes/allRoutes';
-import { Connection, createConnection, getConnection } from 'typeorm';
+import { Connection, createConnection, EntityMetadata } from 'typeorm';
 import { UserSetup } from './userSetup/userSetup';
 import { GroupSetup } from './groupSetup/groupSetup';
 
@@ -12,12 +12,29 @@ class TestSetup {
   connection: Connection | null = null;
   userSetup: UserSetup | null = null;
   groupSetup: GroupSetup | null = null;
+
   async start() {
     await this.createTestConnection();
     this.setupRouter();
-    this.consumeRouter();
+    this.app.use(this.router);
     this.userSetup = new UserSetup(this.connection);
     this.groupSetup = new GroupSetup(this.connection);
+    console.log(await this.getEntities()); // REMOVE LATERRRRR
+  }
+
+  async closeConnection() {
+    if (this.connection) {
+      await this.connection.close();
+    }
+  }
+
+  // async dropEntity()
+
+  async getEntities() {
+    const promised = [];
+    this.connection.entityMetadatas.forEach((entity) => promised.push(entity));
+    const entities = await Promise.all(promised);
+    return entities;
   }
 
   private setupRouter() {
@@ -26,10 +43,6 @@ class TestSetup {
       route(router, this.connection);
     });
     this.router = router;
-  }
-
-  private consumeRouter() {
-    this.app.use(this.router);
   }
 
   private async createTestConnection() {
@@ -49,12 +62,6 @@ class TestSetup {
       subscribers: ['src/subscriber/**/*.ts'],
     });
     this.connection = connection;
-  }
-
-  async closeConnection() {
-    if (this.connection) {
-      await this.connection.close();
-    }
   }
 }
 
