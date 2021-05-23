@@ -23,7 +23,7 @@ const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideP
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const authToken = context.req.cookies['JWT'] || '';
   try {
-    const res = await authenticatedRequest(authToken).get<groups>('http://api:3080/dashboard');
+    const res = await authenticatedRequest(authToken).get<groups>('http://api:3080/get-groups');
 
     return {
       props: { groups: res.data },

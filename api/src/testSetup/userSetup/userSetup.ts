@@ -2,6 +2,8 @@ import { Connection } from 'typeorm';
 import { User } from '../../entity';
 import { userData } from './userData';
 import { BaseSetupAbstract } from '../../testSetup/BaseSetupAbstract';
+import { signJwt } from '../../routes/auth/login/login';
+
 export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
   constructor(protected connection: Connection | null) {
     super();
@@ -26,5 +28,11 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
   async instatiateAll() {}
   // MAKE INSTANTIATEMULTIPLEUSERS
 
-  getValidJwt() {}
+  async getValidJwt() {
+    const repo = this.connection.getRepository(User);
+    const users = await repo.find();
+    const user = users[0];
+    delete user.password;
+    return signJwt(user);
+  }
 }

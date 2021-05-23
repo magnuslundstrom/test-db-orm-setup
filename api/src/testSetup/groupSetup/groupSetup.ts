@@ -21,5 +21,15 @@ export class GroupSetup extends BaseSetupAbstract<typeof groupData[0]> {
 
     await repo.save(group);
   }
-  public async instatiateAll() {}
+  public async instatiateAll() {
+    const groups = groupData;
+    const repo = this.connection.getRepository(Group);
+
+    const proms = [];
+
+    groups.forEach((group) => {
+      proms.push(repo.save(Group.createNewInstance(group)));
+    });
+    await Promise.all(proms);
+  }
 }

@@ -5,7 +5,7 @@ export default function Home() {
   const { user, jwt } = useUser();
 
   const onClick = async () => {
-    const res = await authenticatedRequest(jwt).get('/dashboard');
+    const res = await authenticatedRequest(jwt).get('/get-groups');
   };
 
   return (

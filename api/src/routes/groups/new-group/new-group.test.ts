@@ -1,8 +1,6 @@
 import request from 'supertest';
 import TestSetup from '../../../testSetup/testSetup';
 
-// needs to have a valid jwt also
-
 const testSetup = new TestSetup();
 
 beforeAll(async () => {
@@ -16,9 +14,10 @@ afterAll(async () => {
 
 describe('Test new Group route', () => {
   test('Create new group with correct body', async () => {
+    const validJwt = await testSetup.userSetup.getValidJwt();
     await request(testSetup.app)
       .post('/new-group')
-      .set('Authorization', 'e')
+      .set('Authorization', `Bearer ${validJwt}`)
       .send({
         ...testSetup.groupSetup.data[0],
       })
