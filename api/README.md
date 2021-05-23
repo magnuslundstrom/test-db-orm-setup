@@ -1,7 +1,3 @@
-# Awesome Project Build with TypeORM
+# API for the StudyPartnr
 
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+Very basic setup, focusing mostly on the frontend part & trying to write tests
