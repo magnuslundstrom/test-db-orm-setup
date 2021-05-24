@@ -16,7 +16,7 @@ export default (router: Router, connection: Connection) => {
       const repository = connection.getRepository(User);
       const user = User.createNewInstance({ ...req.body, age: parseInt(req.body.age) });
       await repository.save(user);
-      res.send(201);
+      res.sendStatus(201);
     } catch (err) {
       console.log(err);
       res.status(404).send('Something went wrong');

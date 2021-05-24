@@ -19,16 +19,24 @@ class TestSetup {
     this.app.use(this.router);
     this.userSetup = new UserSetup(this.connection);
     this.groupSetup = new GroupSetup(this.connection);
-    console.log(await this.getEntities()); // REMOVE LATERRRRR
   }
 
   async closeConnection() {
     if (this.connection) {
+      await this.dropEntities(await this.getEntities());
       await this.connection.close();
     }
   }
 
-  // async dropEntity()
+  async dropEntities(entities: EntityMetadata[]) {
+    try {
+      for (let entity of entities) {
+        const { name, tableName } = entity;
+        const repo = this.connection.getRepository(name);
+        await repo.query(`TRUNCATE TABLE ${tableName};`);
+      }
+    } catch (err) {}
+  }
 
   async getEntities() {
     const promised = [];
