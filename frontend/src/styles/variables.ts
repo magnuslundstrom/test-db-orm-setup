@@ -24,6 +24,10 @@ export const colors = {
   darkBg: '#0d1117',
 };
 
+export const widths = {
+  sm: '600px',
+};
+
 export const rounded = {
   sm: '0.25rem',
 };

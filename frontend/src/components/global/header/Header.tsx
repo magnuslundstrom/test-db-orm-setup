@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useUser } from '@hooks/useUser';
-import { StyledHeader, StyledRightHeader } from './StyledHeader';
+import { StyledHeader } from 'src/styles/blocks/header/StyledHeader';
 import { Dropdown } from './Dropdown';
 
 export const Header: React.FC<{}> = () => {
   const { user, onLogout } = useUser();
 
   const renderMenuItems = () => {
-    const urls = [
+    const groupUrls = [
       { url: '/new-group', text: 'New group' },
       { url: '/my-groups', text: 'My groups' },
       { url: '/all-groups', text: 'All groups' },
@@ -21,7 +21,7 @@ export const Header: React.FC<{}> = () => {
             <Link href="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Dropdown buttonText="Groups" urls={urls} />
+            <Dropdown buttonText="Groups" urls={groupUrls} />
           </li>
           <li>
             <Link href="/profile">Profile</Link>
@@ -46,9 +46,9 @@ export const Header: React.FC<{}> = () => {
   return (
     <StyledHeader>
       <Link href="/">StudyPartnr</Link>
-      <StyledRightHeader>
+      <div>
         <ul>{renderMenuItems()}</ul>
-      </StyledRightHeader>
+      </div>
     </StyledHeader>
   );
 };

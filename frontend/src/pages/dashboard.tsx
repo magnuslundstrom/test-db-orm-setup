@@ -14,6 +14,7 @@ const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideP
       <h1>
         Welcome to StudyPartnr {user?.firstName} {user?.lastName}
       </h1>
+      <p>I dont really know what to put here tbh</p>
       <GroupList groups={groups} title="Newest groups" />
       <p>There will be a list of potential new classes that you could take</p>
     </Layout>

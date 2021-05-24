@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { spacing } from '@variables';
+import { widths, spacing } from '@variables';
+
 export const StyledAuthForm = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: ${widths.sm};
   margin: 0px auto;
   input {
     margin-bottom: ${spacing.md};

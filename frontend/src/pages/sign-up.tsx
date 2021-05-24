@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from 'src/components/global/layout/Layout';
-import { StyledAuthForm } from 'src/components/forms/StyledAuthForm';
-import { StyledButton } from 'src/components/buttons/StyledButton';
 
 interface State {
   email: string;
@@ -47,7 +45,7 @@ export default function SignUp() {
 
   return (
     <Layout title="Sign up">
-      <StyledAuthForm onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <input type="text" placeholder="Email" value={state.email} onChange={onEmailChange} />
         <input
           type="text"
@@ -69,8 +67,8 @@ export default function SignUp() {
           onChange={onPasswordChange}
         />
 
-        <StyledButton>Sign up</StyledButton>
-      </StyledAuthForm>
+        <button>Sign up</button>
+      </form>
     </Layout>
   );
 }

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors, spacing, rounded } from '@variables';
+
 const BaseButton = styled.button`
   border-radius: ${rounded.sm};
   color: ${colors.white};
@@ -7,6 +8,6 @@ const BaseButton = styled.button`
   border: 0px;
 `;
 
-export const StyledButton = styled(BaseButton)`
+export const SubmitButton = styled(BaseButton)`
   background-color: ${colors.green500};
 `;

@@ -9,22 +9,22 @@ export const StyledHeader = styled.header`
   justify-content: space-between;
   width: 100%;
   a {
-    color: ${colors.white};
     text-decoration: none;
     font-size: ${fontSizing.lg};
   }
   button {
     background-color: transparent;
-    font-weight: 300;
-    margin: 0px;
-    padding: 0px;
   }
   span {
     cursor: pointer;
   }
-`;
 
-export const StyledRightHeader = styled.div`
+  button,
+  span,
+  a {
+    color: ${colors.white};
+  }
+
   ul {
     list-style-type: none;
     display: flex;

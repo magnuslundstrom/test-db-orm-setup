@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Layout } from '@components/global/layout/Layout';
-import { NotificationBox } from '@components/global/notificationBoxes/NotificationBox';
+import { NotificationBox } from '@components/global/messages/NotificationBox';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
-
 interface State {
   title: string;
   subject: string;
@@ -47,7 +46,9 @@ export default function NewGroup() {
     <Layout title="Start new study group">
       <h1>Start a new study group</h1>
       <form onSubmit={onSubmit}>
+        <label htmlFor="title">Title</label>
         <input type="text" placeholder="Title" onChange={onTitleChange} value={title} />
+        <label htmlFor="subject">Subject</label>
         <input type="text" placeholder="Subject" onChange={onSubjectChange} value={subject} />
         <button>Submit</button>
       </form>

@@ -3,6 +3,7 @@ import { Layout } from '@components/global/layout/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
+
 export default function Profile() {
   const { user } = useUser();
   const [state, setState] = useState<EditAbleUser>({
