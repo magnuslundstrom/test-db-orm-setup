@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors, spacing, fontSizing } from '@variables';
 
-export const StyledHeader = styled.div`
+export const StyledHeader = styled.header`
   background-color: ${colors.blue500};
   padding: ${spacing.lg};
   display: flex;
@@ -19,11 +19,23 @@ export const StyledHeader = styled.div`
     margin: 0px;
     padding: 0px;
   }
+  span {
+    cursor: pointer;
+  }
 `;
 
 export const StyledRightHeader = styled.div`
-  a,
-  button {
-    margin-left: 30px;
+  ul {
+    list-style-type: none;
+    display: flex;
+
+    li {
+      &:hover: {
+        .dropdown-menu {
+          display: flex;
+        }
+      }
+      margin-left: 30px;
+    }
   }
 `;

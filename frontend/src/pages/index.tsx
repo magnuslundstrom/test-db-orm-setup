@@ -14,9 +14,10 @@ export default function Home() {
         <h3>
           Hi {user && user.firstName} {user && user.lastName}
         </h3>
-        <div>Welcome to StudyPartnr. Find a partner for your subject!</div>
-
-        <button onClick={onClick}>Test Auth button</button>
+        <p>
+          I gotta be honest, I do not know what to put here. Maybe should redirect depending on auth
+          situation. Or maybe should contain some sort of a dashboard or something.
+        </p>
       </Layout>
     </div>
   );

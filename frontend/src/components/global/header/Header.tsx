@@ -8,27 +8,47 @@ export const Header: React.FC<{}> = () => {
   const { user, onLogout } = useUser();
 
   const renderMenuItems = () => {
+    const urls = [
+      { url: '/new-group', text: 'New group' },
+      { url: '/my-groups', text: 'My groups' },
+      { url: '/all-groups', text: 'All groups' },
+    ];
+
     if (user) {
       return (
         <>
-          <Link href="/dashboard">Dashboard</Link>
-          <Dropdown buttonText="Groups" urls={[]} />
-          <Link href="/profile">Profile</Link>
-          <button onClick={onLogout}>Logout</button>
+          <li>
+            <Link href="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Dropdown buttonText="Groups" urls={urls} />
+          </li>
+          <li>
+            <Link href="/profile">Profile</Link>
+          </li>
+          <li>
+            <button onClick={onLogout}>Logout</button>
+          </li>
         </>
       );
     }
     return (
       <>
-        <Link href="/login">Login</Link>
-        <Link href="/sign-up">Sign up</Link>
+        <li>
+          <Link href="/login">Login</Link>
+        </li>
+        <li>
+          <Link href="/sign-up">Sign up</Link>
+        </li>
       </>
     );
   };
   return (
     <StyledHeader>
       <Link href="/">StudyPartnr</Link>
-      <StyledRightHeader>{renderMenuItems()}</StyledRightHeader>
+      <StyledRightHeader>
+        <ul>{renderMenuItems()}</ul>
+      </StyledRightHeader>
     </StyledHeader>
   );
 };

@@ -10,6 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "allowJs": false,
     "paths": {
       "*": ["types/*.d.ts"]
     }
