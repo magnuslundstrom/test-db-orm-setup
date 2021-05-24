@@ -25,7 +25,9 @@ export const UserContextProvider: React.FC<{}> = (props) => {
   const router = useRouter();
 
   useEffect(() => {
-    // check if logged in on boot
+    /**
+     * Check if the user has JWT in a cookie
+     */
     const attemptLogin = async () => {
       try {
         const response = await axios.post<RealisticUserFromServer>(
@@ -35,7 +37,6 @@ export const UserContextProvider: React.FC<{}> = (props) => {
           }
         );
         setUser(response.data);
-        router.push('/dashboard');
       } catch (err) {
         router.push('/login');
       }
@@ -52,6 +53,7 @@ export const UserContextProvider: React.FC<{}> = (props) => {
   const onLogout = () => {
     setUser(null);
     onRemoveJwt();
+    router.push('/login');
   };
 
   const value = {

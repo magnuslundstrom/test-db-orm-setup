@@ -2,17 +2,19 @@ import React from 'react';
 import Link from 'next/link';
 import { useUser } from '@hooks/useUser';
 import { StyledHeader, StyledRightHeader } from './StyledHeader';
+import { Dropdown } from './Dropdown';
+
 export const Header: React.FC<{}> = () => {
-  const { user } = useUser();
+  const { user, onLogout } = useUser();
 
   const renderMenuItems = () => {
     if (user) {
       return (
         <>
           <Link href="/dashboard">Dashboard</Link>
-          <Link href="/new-group">New group</Link>
+          <Dropdown buttonText="Groups" urls={[]} />
           <Link href="/profile">Profile</Link>
-          <Link href="/logout">Logout</Link>
+          <button onClick={onLogout}>Logout</button>
         </>
       );
     }
