@@ -3,6 +3,8 @@ import { Layout } from '@components/global/layout/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
+import { StyledForm, StyledButton, StyledFormInput, StyledLabel } from '@elements';
+
 export default function Profile() {
   const { user } = useUser();
   const [state, setState] = useState<EditAbleUser>({
@@ -24,9 +26,9 @@ export default function Profile() {
   return (
     <Layout title="Profile">
       <h1>Edit your profile</h1>
-      <form>
-        <label htmlFor="firstName">First name</label>
-        <input
+      <StyledForm width="sm">
+        <StyledLabel htmlFor="firstName">First name</StyledLabel>
+        <StyledFormInput
           type="text"
           id="firstName"
           name="firstName"
@@ -34,8 +36,8 @@ export default function Profile() {
           onChange={onFirstNameChange}
         />
 
-        <label htmlFor="lastName">Last name</label>
-        <input
+        <StyledLabel htmlFor="lastName">Last name</StyledLabel>
+        <StyledFormInput
           type="text"
           id="lastName"
           name="lastName"
@@ -43,22 +45,28 @@ export default function Profile() {
           onChange={onLastNameChange}
         />
 
-        <label htmlFor="email">Email</label>
-        <input type="text" id="email" name="email" value={state.email} onChange={onEmailChange} />
+        <StyledLabel htmlFor="email">Email</StyledLabel>
+        <StyledFormInput
+          type="text"
+          id="email"
+          name="email"
+          value={state.email}
+          onChange={onEmailChange}
+        />
 
-        <label htmlFor="age">Age</label>
-        <input type="text" id="age" name="age" value={state.age} onChange={onAgeChange} />
+        <StyledLabel htmlFor="age">Age</StyledLabel>
+        <StyledFormInput type="text" id="age" name="age" value={state.age} onChange={onAgeChange} />
 
-        <label htmlFor="password">Password</label>
-        <input
+        <StyledLabel htmlFor="password">Password</StyledLabel>
+        <StyledFormInput
           type="text"
           id="password"
           name="password"
           value={state.password}
           onChange={onPasswordChange}
         />
-        <button>Submit update</button>
-      </form>
+        <StyledButton backgroundColor="midGreen">Submit update</StyledButton>
+      </StyledForm>
     </Layout>
   );
 }

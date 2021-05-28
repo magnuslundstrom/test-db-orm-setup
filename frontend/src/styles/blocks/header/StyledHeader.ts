@@ -1,30 +1,30 @@
 import styled from 'styled-components';
-import { colors, spacing, fontSizing } from '@variables';
+import { colors, spacing, fontSizes } from '@variables';
 
 export const StyledHeader = styled.header`
-  background-color: ${colors.blue500};
+  background-color: ${colors.midBlue};
   padding: ${spacing.lg};
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   a {
-    color: ${colors.white};
     text-decoration: none;
-    font-size: ${fontSizing.lg};
+    font-size: ${fontSizes.lg};
   }
   button {
     background-color: transparent;
-    font-weight: 300;
-    margin: 0px;
-    padding: 0px;
   }
   span {
     cursor: pointer;
   }
-`;
 
-export const StyledRightHeader = styled.div`
+  button,
+  span,
+  a {
+    color: ${colors.white};
+  }
+
   ul {
     list-style-type: none;
     display: flex;

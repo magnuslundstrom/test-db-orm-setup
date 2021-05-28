@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Layout } from '@components/global/layout/Layout';
-import { NotificationBox } from '@components/global/notificationBoxes/NotificationBox';
+import { NotificationBox } from '@components/global/messages/NotificationBox';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
+import {
+  StyledForm,
+  StyledButton,
+  StyledFormInput,
+  StyledContainer,
+  StyledLabel,
+} from 'src/styles/elements';
 
 interface State {
   title: string;
@@ -46,11 +53,18 @@ export default function NewGroup() {
   return (
     <Layout title="Start new study group">
       <h1>Start a new study group</h1>
-      <form onSubmit={onSubmit}>
-        <input type="text" placeholder="Title" onChange={onTitleChange} value={title} />
-        <input type="text" placeholder="Subject" onChange={onSubjectChange} value={subject} />
-        <button>Submit</button>
-      </form>
+      <StyledForm onSubmit={onSubmit} width="sm">
+        <StyledLabel htmlFor="title">Title</StyledLabel>
+        <StyledFormInput type="text" placeholder="Title" onChange={onTitleChange} value={title} />
+        <StyledLabel htmlFor="subject">Subject</StyledLabel>
+        <StyledFormInput
+          type="text"
+          placeholder="Subject"
+          onChange={onSubjectChange}
+          value={subject}
+        />
+        <StyledButton backgroundColor="midGreen">Submit</StyledButton>
+      </StyledForm>
       <NotificationBox message={message} />
     </Layout>
   );

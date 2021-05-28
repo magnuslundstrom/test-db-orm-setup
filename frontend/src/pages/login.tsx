@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/layout/Layout';
-import { StyledAuthForm } from '@components/forms/StyledAuthForm';
-import { StyledButton } from '@components/buttons/StyledButton';
 import { loginResponse } from '@utils/types/loginResponse';
 import { useRouter } from 'next/router';
+import { StyledButton, StyledForm, StyledFormInput, StyledContainer } from '@elements';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -37,11 +36,19 @@ export default function Login() {
 
   return (
     <Layout title="Login">
-      <StyledAuthForm onSubmit={onSubmit}>
-        <input type="text" placeholder="Email" value={email} onChange={onSetEmail} />
-        <input type="password" placeholder="Password" value={password} onChange={onSetPassword} />
-        <StyledButton>Login</StyledButton>
-      </StyledAuthForm>
+      <StyledContainer width="sm">
+        <h1>Login</h1>
+        <StyledForm onSubmit={onSubmit} width="sm">
+          <StyledFormInput type="text" placeholder="Email" value={email} onChange={onSetEmail} />
+          <StyledFormInput
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={onSetPassword}
+          />
+          <StyledButton backgroundColor="midGreen">Login</StyledButton>
+        </StyledForm>
+      </StyledContainer>
     </Layout>
   );
 }

@@ -1,27 +1,35 @@
 export const colors = {
   // blue
-  blue800: '#25277a',
-  blue500: '#0251d6',
+  midBlue: '#0251d6',
+  darkBlue: '#25277a',
 
   // red
-  red800: '#92364e',
-  red400: '#fb0246',
-  red200: '#fa7a5b',
+  lightRed: '#fa7a5b',
+  midRed: '#fb0246',
+  darkRed: '#92364e',
   // green
-  green500: '#03bd85',
-  green300: '#52e0c0',
+  lightGreen: '#52e0c0',
+  midGreen: '#03bd85',
+  darkGreen: '#047857',
   // white
   white: '#fff',
 
   // gray
-  gray100: '#edf1f4',
-  gray400: '#bcbcbc',
-  gray800: '#35465a',
+  lightGray: '#edf1f4',
+  midGray: '#bcbcbc',
+  darkGray: '#35465a',
 
   // orange
-  orange400: '#fa7a5b',
+  midOrange: '#fa7a5b',
 
+  // utilities
   darkBg: '#0d1117',
+};
+
+export const widths = {
+  sm: '600px',
+  md: '900px',
+  lg: '1100px',
 };
 
 export const rounded = {
@@ -41,8 +49,9 @@ export const shadow = {
       box-shadow: 0px 7px 12px -4px rgba(181,181,181,1);`,
 };
 
-export const fontSizing = {
+export const fontSizes = {
   sm: '13px',
   md: '16px',
   lg: '20px',
+  xl: '34px',
 };

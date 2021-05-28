@@ -1,7 +1,7 @@
-export interface group {
+export interface iGroup {
   id: number;
   title: string;
   subject: string;
 }
 
-export type groups = group[];
+export type groups = iGroup[];
