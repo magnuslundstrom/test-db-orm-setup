@@ -45,9 +45,11 @@ export const Header: React.FC<{}> = () => {
   };
   return (
     <StyledHeader>
-      <Link href="/">StudyPartnr</Link>
       <div>
-        <ul>{renderMenuItems()}</ul>
+        <Link href="/">StudyPartnr</Link>
+        <div>
+          <ul>{renderMenuItems()}</ul>
+        </div>
       </div>
     </StyledHeader>
   );

@@ -1,13 +1,9 @@
 import styled from 'styled-components';
-import { colors, spacing, fontSizes } from '@variables';
+import { colors, spacing, fontSizes, widths } from '@variables';
 
 export const StyledHeader = styled.header`
   background-color: ${colors.midBlue};
-  padding: ${spacing.lg};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+
   a {
     text-decoration: none;
     font-size: ${fontSizes.lg};
@@ -37,5 +33,13 @@ export const StyledHeader = styled.header`
       }
       margin-left: 30px;
     }
+  }
+  & > div {
+    display: flex;
+    padding: ${spacing.md} 0px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: ${widths.lg};
+    margin: 0 auto;
   }
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, spacing, rounded } from '@variables';
+import { colors, spacing, rounded, transitions } from '@variables';
 import { findHoverColor } from '@utils/helperFunctions/findHoverColor';
 
 const StyledBaseButton = styled.button`
@@ -13,7 +13,7 @@ const StyledBaseButton = styled.button`
 
 export const StyledButton = styled(StyledBaseButton)<{ backgroundColor: keyof typeof colors }>`
   background-color: ${({ backgroundColor }) => colors[backgroundColor]};
-
+  transition: background-color ${transitions.medium};
   &:hover {
     background-color: ${({ backgroundColor }) => findHoverColor(backgroundColor)};
   }

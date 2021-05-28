@@ -37,6 +37,7 @@ export const rounded = {
 };
 
 export const spacing = {
+  xs: '2.5px',
   sm: '5px',
   md: '15px',
   lg: '25px',
@@ -54,4 +55,10 @@ export const fontSizes = {
   md: '16px',
   lg: '20px',
   xl: '34px',
+};
+
+export const transitions = {
+  fast: '150ms',
+  medium: '300ms',
+  slow: '500ms',
 };

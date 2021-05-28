@@ -19,6 +19,7 @@ export const StyledDropdownMenu = styled.div`
   width: 200px;
   display: none;
   flex-direction: column;
+  z-index: 100;
   a,
   span {
     margin-left: 0px;
