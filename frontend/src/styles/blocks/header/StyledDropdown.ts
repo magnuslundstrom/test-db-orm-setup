@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '@variables';
+import { colors, spacing } from '@variables';
 
 export const StyledDropdownTrigger = styled.div`
   display: inline-block;
@@ -14,7 +14,7 @@ export const StyledDropdownTrigger = styled.div`
 
 export const StyledDropdownMenu = styled.div`
   position: absolute;
-  background-color: ${colors.blue500};
+  background-color: ${colors.midBlue};
   padding: 10px;
   width: 200px;
   display: none;
@@ -24,5 +24,10 @@ export const StyledDropdownMenu = styled.div`
     margin-left: 0px;
     border-bottom: 1px solid white;
     margin-bottom: 10px;
+    padding: ${spacing.sm};
+
+    &:hover {
+      background-color: ${colors.darkBlue};
+    }
   }
 `;

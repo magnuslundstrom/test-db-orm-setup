@@ -9,9 +9,9 @@ export const Header: React.FC<{}> = () => {
 
   const renderMenuItems = () => {
     const groupUrls = [
-      { url: '/new-group', text: 'New group' },
-      { url: '/my-groups', text: 'My groups' },
-      { url: '/all-groups', text: 'All groups' },
+      { url: '/groups/new', text: 'New group' },
+      { url: '/groups/my', text: 'My groups' },
+      { url: '/groups/all', text: 'All groups' },
     ];
 
     if (user) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from 'src/components/global/layout/Layout';
+import { StyledForm, StyledButton, StyledFormInput, StyledContainer } from '@elements';
 
 interface State {
   email: string;
@@ -45,30 +46,37 @@ export default function SignUp() {
 
   return (
     <Layout title="Sign up">
-      <form onSubmit={onSubmit}>
-        <input type="text" placeholder="Email" value={state.email} onChange={onEmailChange} />
-        <input
-          type="text"
-          placeholder="First name"
-          value={state.firstName}
-          onChange={onFirstNameChange}
-        />
-        <input
-          type="text"
-          placeholder="Last name"
-          value={state.lastName}
-          onChange={onLastNameChange}
-        />
-        <input type="text" placeholder="Age" value={state.age} onChange={onAgeChange} />
-        <input
-          type="password"
-          placeholder="Password"
-          value={state.password}
-          onChange={onPasswordChange}
-        />
-
-        <button>Sign up</button>
-      </form>
+      <StyledContainer width="sm">
+        <h1>Sign up</h1>
+        <StyledForm onSubmit={onSubmit} width="sm">
+          <StyledFormInput
+            type="text"
+            placeholder="Email"
+            value={state.email}
+            onChange={onEmailChange}
+          />
+          <StyledFormInput
+            type="text"
+            placeholder="First name"
+            value={state.firstName}
+            onChange={onFirstNameChange}
+          />
+          <StyledFormInput
+            type="text"
+            placeholder="Last name"
+            value={state.lastName}
+            onChange={onLastNameChange}
+          />
+          <StyledFormInput type="text" placeholder="Age" value={state.age} onChange={onAgeChange} />
+          <StyledFormInput
+            type="password"
+            placeholder="Password"
+            value={state.password}
+            onChange={onPasswordChange}
+          />
+          <StyledButton backgroundColor="midGreen">Sign up</StyledButton>
+        </StyledForm>
+      </StyledContainer>
     </Layout>
   );
 }

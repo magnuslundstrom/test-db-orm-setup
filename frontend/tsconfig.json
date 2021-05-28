@@ -4,9 +4,11 @@
     "paths": {
       "@contexts/*": ["src/utils/contexts/*"],
       "@components/*": ["src/components/*"],
-      "@variables": ["src/styles/variables"],
       "@hooks/*": ["src/utils/hooks/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@variables": ["src/styles/variables"],
+      "@blocks/*": ["src/styles/blocks"],
+      "@elements": ["src/styles/elements"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

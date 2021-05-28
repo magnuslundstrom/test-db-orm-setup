@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { colors, spacing, fontSizing } from '@variables';
+import { colors, spacing, fontSizes } from '@variables';
 
 export const StyledHeader = styled.header`
-  background-color: ${colors.blue500};
+  background-color: ${colors.midBlue};
   padding: ${spacing.lg};
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   a {
     text-decoration: none;
-    font-size: ${fontSizing.lg};
+    font-size: ${fontSizes.lg};
   }
   button {
     background-color: transparent;

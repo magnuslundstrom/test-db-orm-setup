@@ -1,13 +1,14 @@
-import { group } from '@utils/types/Group';
-import { StyledGroup } from './StyledGroup';
-export const Group: React.FC<group> = ({ id, title, subject }) => {
+import { iGroup } from '@utils/types/Group';
+import { StyledGroup } from 'src/styles/blocks/cards/groups';
+
+export const Group: React.FC<iGroup> = ({ id, title, subject }) => {
   return (
-    <StyledGroup>
+    <StyledGroup.Card>
       <div>
-        <h3>{title}</h3>
+        <StyledGroup.Header>{title}</StyledGroup.Header>
       </div>
       <p>{subject}</p>
-      <button>Join group</button>
-    </StyledGroup>
+      <StyledGroup.Button backgroundColor="midGreen">Join group</StyledGroup.Button>
+    </StyledGroup.Card>
   );
 };
