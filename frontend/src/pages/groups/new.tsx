@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from '@components/global/layout/Layout';
 import { NotificationBox } from '@components/global/messages/NotificationBox';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
-import {
-  StyledForm,
-  StyledButton,
-  StyledFormInput,
-  StyledContainer,
-  StyledLabel,
-} from 'src/styles/elements';
+import { StyledForm, StyledButton, StyledFormInput, StyledLabel } from 'src/styles/elements';
 
 interface State {
   title: string;
@@ -33,6 +27,12 @@ export default function NewGroup() {
   const cleanState = () => {
     setState({ title: '', subject: '' });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
+  }, [message]);
 
   const { title, subject } = state;
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
