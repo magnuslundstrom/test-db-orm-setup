@@ -19,8 +19,7 @@ const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideP
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const authToken = context.req.cookies['JWT'] || '';
-  let page = context.query.page;
-  if (page) page = page[0];
+  let page = context.query.page ? context.query.page[0] : '1';
 
   try {
     const res = await authenticatedRequest(authToken).get<groups>(
