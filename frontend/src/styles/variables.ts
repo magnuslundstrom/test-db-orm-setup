@@ -27,6 +27,7 @@ export const colors = {
 };
 
 export const widths = {
+  xs: '250px',
   sm: '600px',
   md: '900px',
   lg: '1100px',
