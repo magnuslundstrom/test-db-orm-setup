@@ -12,15 +12,20 @@ const Dashboard = ({ groups }: InferGetServerSidePropsType<typeof getServerSideP
   return (
     <Layout title="All groups">
       <h1>All groups</h1>
-      <GroupList groups={groups} title="Newest groups" />
+      {(groups.length && <GroupList groups={groups} title="Newest groups" />) || 'hi'}
     </Layout>
   );
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const authToken = context.req.cookies['JWT'] || '';
+  let page = context.query.page;
+  if (page) page = page[0];
+
   try {
-    const res = await authenticatedRequest(authToken).get<groups>('http://api:3080/get-groups');
+    const res = await authenticatedRequest(authToken).get<groups>(
+      `http://api:3080/get-groups/${page}`
+    );
 
     return {
       props: { groups: res.data },
