@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Connection } from 'typeorm';
-import { User } from '../../../entity/user/User';
+import { Users } from '../../../entity/users/users';
 
 interface SignUpProperties {
   firstName: string;
@@ -13,8 +13,8 @@ interface SignUpProperties {
 export default (router: Router, connection: Connection) => {
   router.post('/sign-up', async (req: RequestWithBody<SignUpProperties>, res) => {
     try {
-      const repository = connection.getRepository(User);
-      const user = User.createNewInstance({ ...req.body, age: parseInt(req.body.age) });
+      const repository = connection.getRepository(Users);
+      const user = Users.createNewInstance({ ...req.body, age: parseInt(req.body.age) });
       await repository.save(user);
       res.sendStatus(201);
     } catch (err) {

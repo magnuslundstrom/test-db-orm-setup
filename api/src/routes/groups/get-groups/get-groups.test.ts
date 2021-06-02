@@ -1,12 +1,13 @@
 import request from 'supertest';
 import TestSetup from '../../../testSetup/testSetup';
+import { pageCount } from './get-groups';
 
 const testSetup = new TestSetup();
 
 beforeAll(async () => {
   await testSetup.start();
-  await testSetup.groupSetup.instatiateAll();
   await testSetup.userSetup.instantiateOne();
+  await testSetup.groupSetup.instantiateAll();
 });
 
 afterAll(async () => {
@@ -14,12 +15,23 @@ afterAll(async () => {
 });
 
 describe('Test if getting correct groups', () => {
-  test('Test if we get all the groups back in response', async () => {
+  test('Page one', async () => {
+    const firstPageGroups = testSetup.groupSetup.data.slice(2, pageCount + 2);
     const validJwt = await testSetup.userSetup.getValidJwt();
+
     const response = await request(testSetup.app)
-      .get('/get-groups')
+      .get('/get-groups/1')
       .set('Authorization', `Bearer ${validJwt}`);
     expect(response.statusCode).toBe(200);
-    expect(response.text).toContain(JSON.stringify(testSetup.groupSetup.data[0].subject));
+
+    firstPageGroups.forEach((group) => {
+      expect(response.text).toContain(group.subject);
+      expect(response.text).toContain(group.title);
+    });
   });
+
+  // test('Results page two', async () => {
+  //   const { data } = testSetup.groupSetup;
+  //   const secondPageGroups = data.slice(0, 2);
+  // });
 });

@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { User } from '../../entity';
+import { Users } from '../../entity';
 import { userData } from './userData';
 import { BaseSetupAbstract } from '../../testSetup/BaseSetupAbstract';
 import { signJwt } from '../../routes/auth/login/login';
@@ -12,24 +12,27 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
   data = userData;
 
   async instantiateOne() {
-    if (this.connection) {
-      const repo = this.connection.getRepository(User);
-      const { firstName, lastName, age, email, password } = this.data[0];
-      const user = User.createNewInstance({
-        firstName,
-        lastName,
-        age,
-        email,
-        password,
-      });
-      await repo.save(user);
+    try {
+      if (this.connection) {
+        const repo = this.connection.getRepository(Users);
+        const { firstName, lastName, age, email, password } = this.data[0];
+        const user = Users.createNewInstance({
+          firstName,
+          lastName,
+          age,
+          email,
+          password,
+        });
+        await repo.save(user);
+      }
+    } catch (err) {
+      console.log('here');
     }
   }
-  async instatiateAll() {}
-  // MAKE INSTANTIATEMULTIPLEUSERS
+  async instantiateAll() {}
 
   async getValidJwt() {
-    const repo = this.connection.getRepository(User);
+    const repo = this.connection.getRepository(Users);
     const users = await repo.find();
     const user = users[0];
     delete user.password;

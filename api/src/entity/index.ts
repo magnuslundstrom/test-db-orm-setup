@@ -1,2 +1,2 @@
-export * from './user/User';
-export * from './group/Group';
+export * from './users/users';
+export * from './groups/groups';
