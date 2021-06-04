@@ -43,6 +43,7 @@ export const spacing = {
   md: '15px',
   lg: '25px',
   xl: '50px',
+  xxl: '100px',
 };
 
 export const shadow = {

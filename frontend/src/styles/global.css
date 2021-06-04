@@ -33,6 +33,7 @@ button {
   margin: 0px;
   padding: 0px;
   font-weight: 300;
+  background-color: transparent;
 }
 
 a {

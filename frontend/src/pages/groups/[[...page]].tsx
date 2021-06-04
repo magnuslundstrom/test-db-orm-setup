@@ -6,37 +6,42 @@ import { groups } from '@utils/types/Group';
 import { Pagination } from '@components/global/Pagination';
 import { GroupList } from '@components/groups/GroupList';
 
-const Dashboard = ({ groups, count }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Dashboard = ({
+  groups,
+  count,
+  page,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <Layout title="All groups">
       <h1>All groups</h1>
       {(groups.length && <GroupList groups={groups} title="Newest groups" />) || 'No groups'}
 
-      <Pagination count={count} limit={6} page={0} />
+      <Pagination count={count} limit={6} page={page} />
     </Layout>
   );
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const authToken = context.req.cookies['JWT'] || '';
-  let page = context.query.page ? context.query.page[0] : '0';
 
-  try {
-    const res = await authenticatedRequest(authToken).get<[groups[], number]>(
-      `http://api:3080/get-groups/${page}`
-    );
+  // Change this mess later 🥴
+  let page = context.query.page;
+  if (page) {
+    if (page[0] === 'all' || page[0] === '0') page = '1';
+    else page = page[0];
+  } else page = '1';
 
-    return {
-      props: { groups: res.data[0], count: res.data[1], page: parseInt(page) },
-    };
-  } catch (err) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
+  const res = await authenticatedRequest(authToken).get<[groups, number]>(
+    `http://api:3080/get-groups/${page}`
+  );
+
+  // Something should happen if we get 0 results obv.
+
+  const [groups, count] = res.data;
+
+  return {
+    props: { groups, count, page },
+  };
 }
 
 export default Dashboard;

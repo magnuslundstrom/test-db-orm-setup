@@ -5,46 +5,35 @@ import styled from 'styled-components';
 export const Pagination: React.FC<{
   count: number;
   limit: number;
-  page: number;
+  page: string;
 }> = ({ count, limit, page }) => {
   const renderPages = () => {
-    let c = 0;
-    let num = 1;
+    const amountOfPages = Math.ceil(count / limit);
+    let i = 1;
     const pages = [];
-    while (c < count) {
+    while (i <= amountOfPages) {
+      const isCurrentPage = i === parseInt(page);
       pages.push(
-        <Link href={`/groups/all/${num}`}>
-          <PageButton>{num}</PageButton>
+        <Link href={`/groups/${i}`} key={i}>
+          <PageButton isCurrentPage={isCurrentPage}>{i}</PageButton>
         </Link>
       );
-      c += limit;
-      num++;
+      i++;
     }
-
-    pages.unshift(
-      <Link href={`/groups/all/${page - 1}`}>
-        <PageButton>{num}</PageButton>
-      </Link>
-    );
-
-    pages.push(
-      <Link href={`/groups/all/${page + 1}`}>
-        <PageButton>{num}</PageButton>
-      </Link>
-    );
     return pages;
   };
 
-  return <Box>{renderPages()}</Box>;
+  return <Box>{<div>{renderPages()}</div>}</Box>;
 };
 
 const Box = styled.div`
+  margin-top: ${spacing.lg};
   display: flex;
   max-width: ${widths.xs};
 `;
 
-const PageButton = styled.a`
-  background-color: ${colors.midBlue};
+const PageButton = styled.a<{ isCurrentPage: boolean }>`
+  background-color: ${({ isCurrentPage }) => (isCurrentPage ? colors.darkGray : colors.midGray)};
   color: ${colors.white};
   margin-top: ${spacing.lg};
   margin-right: ${spacing.md};

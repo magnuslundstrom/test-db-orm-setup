@@ -30,8 +30,29 @@ describe('Test if getting correct groups', () => {
     });
   });
 
-  // test('Results page two', async () => {
-  //   const { data } = testSetup.groupSetup;
-  //   const secondPageGroups = data.slice(0, 2);
-  // });
+  test('Results page two', async () => {
+    const { data } = testSetup.groupSetup;
+    const secondPageGroups = data.slice(0, 2);
+    const validJwt = await testSetup.userSetup.getValidJwt();
+
+    const response = await request(testSetup.app)
+      .get('/get-groups/2')
+      .set('Authorization', `Bearer ${validJwt}`);
+
+    expect(response.statusCode).toBe(200);
+    secondPageGroups.forEach((group) => {
+      expect(response.text).toContain(group.subject);
+      expect(response.text).toContain(group.title);
+    });
+  });
+
+  test('Results page three (DOESN"T EXIST)', async () => {
+    const validJwt = await testSetup.userSetup.getValidJwt();
+
+    const response = await request(testSetup.app)
+      .get('/get-groups/3')
+      .set('Authorization', `Bearer ${validJwt}`);
+    expect(response.statusCode).toBe(200);
+    expect(response.text).toContain('[]');
+  });
 });
