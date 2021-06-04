@@ -2,9 +2,9 @@ import { Router, Response } from 'express';
 import { Connection } from 'typeorm';
 import jwt from 'jsonwebtoken';
 import { secret } from '../../../config';
-import { User } from '../../../entity/user/User';
+import { Users } from '../../../entity/users/users';
 
-export const signJwt = (user: User) => {
+export const signJwt = (user: Users) => {
   return jwt.sign({ ...user }, secret);
 };
 
@@ -14,7 +14,7 @@ export default (router: Router, connection: Connection) => {
     async (req: RequestWithBody<{ email: string; password: string }>, res: Response) => {
       try {
         const { email, password } = req.body;
-        const repository = connection.getRepository(User);
+        const repository = connection.getRepository(Users);
         const user = await repository.findOne({ email, password });
         if (user) {
           delete user.password;

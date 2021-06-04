@@ -31,11 +31,12 @@ class TestSetup {
   async dropEntities(entities: EntityMetadata[]) {
     try {
       for (let entity of entities) {
-        const { name, tableName } = entity;
-        const repo = this.connection.getRepository(name);
-        await repo.query(`TRUNCATE TABLE ${tableName};`);
+        const { tableName } = entity;
+        await this.connection.manager.query(`TRUNCATE TABLE ${tableName};`);
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   async getEntities() {

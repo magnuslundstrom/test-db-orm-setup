@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-type createNewGroupProps = Pick<Group, 'title' | 'subject'>;
+type createNewGroupProps = Pick<Groups, 'title' | 'subject'>;
 
 @Entity()
-export class Group {
+export class Groups {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,7 +14,7 @@ export class Group {
   subject: string;
 
   public static createNewInstance({ title, subject }: createNewGroupProps) {
-    const group = new Group();
+    const group = new Groups();
     group.title = title;
     group.subject = subject;
     return group;

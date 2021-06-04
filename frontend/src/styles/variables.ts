@@ -27,6 +27,7 @@ export const colors = {
 };
 
 export const widths = {
+  xs: '250px',
   sm: '600px',
   md: '900px',
   lg: '1100px',
@@ -42,6 +43,7 @@ export const spacing = {
   md: '15px',
   lg: '25px',
   xl: '50px',
+  xxl: '100px',
 };
 
 export const shadow = {

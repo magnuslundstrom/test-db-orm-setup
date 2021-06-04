@@ -4,7 +4,7 @@ import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
 import { StyledForm, StyledButton, StyledFormInput, StyledLabel } from '@elements';
-
+import { IdeaBox } from '@components/global/ideabox/IdeaBox';
 export default function Profile() {
   const { user } = useUser();
   const [state, setState] = useState<EditAbleUser>({
@@ -67,6 +67,8 @@ export default function Profile() {
         />
         <StyledButton backgroundColor="midGreen">Submit update</StyledButton>
       </StyledForm>
+
+      <IdeaBox ideas={['Add profile image', 'Add Google Authentication']} />
     </Layout>
   );
 }

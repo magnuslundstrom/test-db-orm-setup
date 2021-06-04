@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-type createNewUserProps = Pick<User, 'firstName' | 'lastName' | 'age' | 'email' | 'password'>;
+type createNewUserProps = Pick<Users, 'firstName' | 'lastName' | 'age' | 'email' | 'password'>;
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,7 +32,7 @@ export class User {
     email,
     password,
   }: createNewUserProps) {
-    const user = new User();
+    const user = new Users();
     user.firstName = firstName;
     user.lastName = lastName;
     user.age = age;
