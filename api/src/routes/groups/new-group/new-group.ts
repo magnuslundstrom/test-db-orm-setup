@@ -1,6 +1,6 @@
 import { Router, Response } from 'express';
 import { Connection } from 'typeorm';
-import { Group } from '../../../entity';
+import { Groups } from '../../../entity';
 import { authentication } from '../../../middleware/authentication';
 export default (router: Router, connection: Connection) => {
   router.post(
@@ -8,8 +8,8 @@ export default (router: Router, connection: Connection) => {
     authentication,
     async (req: RequestWithBody<{ title: string; subject: string }>, res: Response) => {
       const { title, subject } = req.body;
-      const repo = connection.getRepository(Group);
-      const group = new Group();
+      const repo = connection.getRepository(Groups);
+      const group = new Groups();
       group.title = title;
       group.subject = subject;
       repo
