@@ -10,7 +10,7 @@ export const pageCount = 6;
 export default (router: Router, connection: Connection) => {
   router.get('/get-groups/:page', authentication, async (req: Request, res: Response) => {
     try {
-      const { page, skip } = req.params;
+      const { page } = req.params;
       validateInputOppositeRegex(/\D/, page);
 
       const repo = connection.getRepository(Groups);
