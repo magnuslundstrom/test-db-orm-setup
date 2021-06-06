@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
 import { Layout } from '@components/global/layout/Layout';
 import { iGroup } from '@utils/types/Group';
@@ -17,13 +17,23 @@ const Group: React.FC<{ group: iGroup }> = ({ group: { title, subject } }) => {
 export default Group;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return {
-    props: {
-      group: {
-        id: 1,
-        title: 'That cool math group',
-        subject: 'Hello how are you',
+  const authToken = context.req.cookies['JWT'] || '';
+
+  // Change this mess later 🥴
+  let id = context.query?.id;
+  try {
+    const res = await authenticatedRequest(authToken).get<iGroup>(
+      `http://api:3080/get-group/${id}`
+    );
+
+    return {
+      props: { group: res.data },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/groups/all',
       },
-    },
-  };
+    };
+  }
 }
