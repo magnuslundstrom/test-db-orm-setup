@@ -38,7 +38,8 @@ class TestSetup {
         await this.connection.manager.query(sql);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err); // This gives foreign_key truncate error
+      // that doesn't seem to cause any issues but is very annoying.
     }
   }
 

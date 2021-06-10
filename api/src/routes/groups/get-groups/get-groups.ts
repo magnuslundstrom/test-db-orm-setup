@@ -31,9 +31,9 @@ export default (router: Router, connection: Connection) => {
           )
         )
         .innerJoin('groups.createdBy', 'createdBy')
-        .skip((parseInt(page) - 1) * pageCount)
+        .offset((parseInt(page) - 1) * pageCount)
+        .limit(pageCount)
         .orderBy({ 'groups.id': 'DESC' })
-        .take(pageCount)
         .getRawMany();
 
       const count = repo.count();

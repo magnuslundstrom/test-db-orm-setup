@@ -4,10 +4,8 @@ import { Groups, Users } from '../../entity';
 import { groupData } from './groupData';
 
 export class GroupSetup extends BaseSetupAbstract<typeof groupData[0]> {
-  protected connection: Connection | null;
-  constructor(connection: Connection | null) {
+  constructor(protected connection: Connection | null) {
     super();
-    this.connection = connection;
   }
   data = groupData;
 
@@ -21,6 +19,7 @@ export class GroupSetup extends BaseSetupAbstract<typeof groupData[0]> {
     });
     await repo.save(group);
   }
+
   public async instantiateAll(createdBy: Users) {
     const groups = groupData;
     const repo = this.connection.getRepository(Groups);
