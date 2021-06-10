@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import app from '../app';
 import { allRoutes } from '../routes/allRoutes';
-import { Connection, createConnection, EntityMetadata } from 'typeorm';
+import { Connection, createConnection, EntityMetadata, getConnection } from 'typeorm';
 import { UserSetup } from './userSetup/userSetup';
 import { GroupSetup } from './groupSetup/groupSetup';
 
@@ -23,7 +23,9 @@ class TestSetup {
 
   async closeConnection() {
     if (this.connection) {
+      await this.connection.manager.query('SET FOREIGN_KEY_CHECKS = 0;');
       await this.dropEntities(await this.getEntities());
+      await this.connection.manager.query('SET FOREIGN_KEY_CHECKS = 1;');
       await this.connection.close();
     }
   }
@@ -32,7 +34,8 @@ class TestSetup {
     try {
       for (let entity of entities) {
         const { tableName } = entity;
-        await this.connection.manager.query(`TRUNCATE TABLE ${tableName};`);
+        const sql = `TRUNCATE TABLE ${tableName};`;
+        await this.connection.manager.query(sql);
       }
     } catch (err) {
       console.log(err);
@@ -55,21 +58,7 @@ class TestSetup {
   }
 
   private async createTestConnection() {
-    const connection = await createConnection({
-      name: 'test',
-      host: 'localhost',
-      port: 3307,
-      username: 'root',
-      password: 'test',
-      database: 'test',
-      type: 'mysql',
-      synchronize: true,
-      migrationsRun: false,
-      logging: false,
-      entities: ['src/entity/**/!(*.test.ts)'],
-      migrations: ['src/migration/**/*.ts'],
-      subscribers: ['src/subscriber/**/*.ts'],
-    });
+    const connection = await createConnection('test');
     this.connection = connection;
   }
 }

@@ -1,13 +1,31 @@
-{
-  "type": "mysql",
-  "host": "db",
-  "port": 3306,
-  "username": "root",
-  "password": "james",
-  "database": "bank",
-  "synchronize": true,
-  "logging": false,
-  "entities": ["src/entity/**/!(*.test.ts)"],
-  "migrations": ["src/migration/**/*.ts"],
-  "subscribers": ["src/subscriber/**/*.ts"]
-}
+[
+  {
+    "name": "default",
+    "type": "mysql",
+    "host": "db",
+    "port": 3306,
+    "username": "root",
+    "password": "james",
+    "database": "bank",
+    "synchronize": true,
+    "logging": false,
+    "entities": ["src/entity/**/!(*.test.ts)"],
+    "migrations": ["src/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"]
+  },
+  {
+    "name": "test",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3307,
+    "username": "root",
+    "password": "test",
+    "database": "test",
+    "synchronize": true,
+    "migrationsRun": false,
+    "logging": false,
+    "entities": ["src/entity/**/!(*.test.ts)"],
+    "migrations": ["src/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"]
+  }
+]

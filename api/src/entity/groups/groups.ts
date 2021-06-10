@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
+import { Users } from '../index';
 
-type createNewGroupProps = Pick<Groups, 'title' | 'subject'>;
+type createNewGroupProps = Pick<Groups, 'title' | 'subject'> & { createdBy: Users };
 
 @Entity()
 export class Groups {
@@ -13,10 +14,23 @@ export class Groups {
   @Column()
   subject: string;
 
-  public static createNewInstance({ title, subject }: createNewGroupProps) {
+  @ManyToOne(() => Users, {
+    onDelete: 'CASCADE',
+  })
+  createdBy: Users;
+
+  @ManyToMany(() => Users, {
+    onDelete: 'CASCADE',
+  })
+  @JoinTable()
+  users: Users[];
+
+  public static createNewInstance({ title, subject, createdBy }: createNewGroupProps) {
     const group = new Groups();
     group.title = title;
     group.subject = subject;
+    group.createdBy = createdBy;
+    group.users = [];
     return group;
   }
 }

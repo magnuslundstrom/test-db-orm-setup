@@ -4,7 +4,7 @@ export abstract class BaseSetupAbstract<T extends {}> {
   protected abstract connection: Connection;
   protected abstract data: T[];
 
-  public abstract instantiateOne(): Promise<void>;
+  public abstract instantiateOne(...args: any[]): Promise<any>;
   /**
    * DO NOT DO LIKE THIS:
    *
@@ -15,5 +15,5 @@ export abstract class BaseSetupAbstract<T extends {}> {
    *
    * The reason is simple. We cannot trust the order of groups being saved for us to test correctly.
    */
-  public abstract instantiateAll(): Promise<void>;
+  public abstract instantiateAll(...args: any[]): Promise<void>;
 }

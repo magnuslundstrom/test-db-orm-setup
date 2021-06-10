@@ -1,9 +1,9 @@
 import { Group } from './Group';
-import { groups } from '@utils/types/Group';
 import { StyledGroup } from 'src/styles/blocks/cards/groups';
+import { ListGroupData } from 'src/pages/groups/[[...page]]';
 
-export const GroupList: React.FC<{ groups: groups } & { title: string }> = ({ groups, title }) => {
-  const groupList = groups.map((group) => <Group {...group} key={group.id} />);
+export const GroupList: React.FC<{ groups: ListGroupData[] }> = ({ groups }) => {
+  const groupList = groups.map((group) => <Group {...group} key={group.groupId} />);
 
   return (
     <>

@@ -23,7 +23,8 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
           email,
           password,
         });
-        await repo.save(user);
+        const savedUser = await repo.save(user);
+        return savedUser;
       }
     } catch (err) {
       console.log('here');
@@ -37,5 +38,15 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
     const user = users[0];
     delete user.password;
     return signJwt(user);
+  }
+
+  public static createNewInstanceWithoutDB() {
+    return Users.createNewInstance({
+      firstName: 'a',
+      lastName: 'a',
+      age: 13,
+      email: 'a@a.dk',
+      password: 'a',
+    });
   }
 }

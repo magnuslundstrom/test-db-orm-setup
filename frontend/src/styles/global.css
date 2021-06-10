@@ -39,3 +39,7 @@ button {
 a {
   cursor: pointer;
 }
+
+a:hover {
+  text-decoration: underline !important;
+}
