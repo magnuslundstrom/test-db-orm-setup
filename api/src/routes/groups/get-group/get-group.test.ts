@@ -5,8 +5,8 @@ const testSetup = new TestSetup();
 
 beforeAll(async () => {
   await testSetup.start();
-  await testSetup.userSetup.instantiateOne();
-  await testSetup.groupSetup.instantiateOne();
+  const createdBy = await testSetup.userSetup.instantiateOne();
+  await testSetup.groupSetup.instantiateOne(createdBy);
 });
 
 afterAll(async () => {

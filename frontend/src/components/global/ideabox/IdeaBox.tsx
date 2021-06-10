@@ -8,8 +8,10 @@ interface Props {
 }
 
 export const IdeaBox: React.FC<Props> = ({ ideas, improvements }) => {
-  const renderIdeas = ideas?.map((idea) => <li>{idea}</li>);
-  const renderImprovements = improvements?.map((improvement) => <li>{improvement}</li>);
+  const renderIdeas = ideas?.map((idea, idx) => <li key={idx}>{idea}</li>);
+  const renderImprovements = improvements?.map((improvement, idx) => (
+    <li key={idx}>{improvement}</li>
+  ));
   return (
     <Wrapper>
       <h2>DEVELOPMENT</h2>

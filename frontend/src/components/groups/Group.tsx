@@ -1,21 +1,41 @@
 import Link from 'next/link';
-import { iGroup } from '@utils/types/Group';
+import styled from 'styled-components';
 import { StyledGroup } from 'src/styles/blocks/cards/groups';
+import { ListGroupData } from 'src/pages/groups/[[...page]]';
+import { colors, spacing } from '@variables';
 
-export const Group: React.FC<iGroup> = ({ id, title, subject }) => {
+export const Group: React.FC<ListGroupData> = ({
+  createdById,
+  createdByName,
+  groupId,
+  groupSubject,
+  groupTitle,
+}) => {
   return (
     <StyledGroup.Card>
       <div>
-        <StyledGroup.Header>{title}</StyledGroup.Header>
+        <StyledGroup.Header>{groupTitle}</StyledGroup.Header>
       </div>
-      <p>{subject}</p>
+      <ProfileBar>
+        <i className="fas fa-user"></i>
+        <Link href={`/users/${createdById}`}>{createdByName}</Link>
+      </ProfileBar>
 
-      <StyledGroup.Button backgroundColor="midGreen">Join group</StyledGroup.Button>
-      <Link href={`/group/${id}`}>
-        <StyledGroup.Button backgroundColor="midBlue" style={{ marginLeft: '15px' }}>
-          Read more
-        </StyledGroup.Button>
+      <p>{groupSubject}</p>
+
+      <Link href={`/group/${groupId}`}>
+        <StyledGroup.Button backgroundColor="midGreen">Read more</StyledGroup.Button>
       </Link>
     </StyledGroup.Card>
   );
 };
+
+const ProfileBar = styled.div`
+  margin-top: ${spacing.md};
+  i {
+    margin-right: ${spacing.md};
+  }
+  a {
+    text-decoration: none;
+  }
+`;

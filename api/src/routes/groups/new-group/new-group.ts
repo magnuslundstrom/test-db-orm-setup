@@ -1,6 +1,6 @@
 import { Router, Response } from 'express';
 import { Connection } from 'typeorm';
-import { Groups } from '../../../entity';
+import { Groups, Users } from '../../../entity';
 import { authentication } from '../../../middleware/authentication';
 export default (router: Router, connection: Connection) => {
   router.post(
@@ -8,11 +8,14 @@ export default (router: Router, connection: Connection) => {
     authentication,
     async (req: RequestWithBody<{ title: string; subject: string }>, res: Response) => {
       const { title, subject } = req.body;
-      const repo = connection.getRepository(Groups);
+      const groupRepo = connection.getRepository(Groups);
+      // const userRepo = connection.getRepository(Users);
+      // const createdBy = await userRepo.findOne(req.userId);
       const group = new Groups();
       group.title = title;
       group.subject = subject;
-      repo
+      group.createdBy = req.user;
+      groupRepo
         .save(group)
         .then(() => {
           return res.status(201).send('Success');

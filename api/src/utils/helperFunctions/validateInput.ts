@@ -3,7 +3,6 @@
  * - As an example if I don't wan't numbers then i pass in \D because it matches anything expect numbers.
  * - The reason for this is that we can easily test the string against anything but numbers. Is there a match then we fail.
  */
-
 export const validateInputOppositeRegex = (
   reg: RegExp,
   input: string,

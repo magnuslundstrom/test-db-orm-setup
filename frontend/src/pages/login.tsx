@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/layout/Layout';
 import { loginResponse } from '@utils/types/loginResponse';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import { StyledButton, StyledForm, StyledFormInput, StyledContainer } from '@elements';
+import { tryCatch } from '@utils/helperFunctions/tryCatch';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { onLogin } = useUser();
 
   const router = useRouter();
@@ -22,15 +24,21 @@ export default function Login() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const [res, err] = await tryCatch<AxiosResponse<loginResponse>>(
+      axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, {
+        email,
+        password,
+      }),
+      'No user with provided credentials'
+    );
 
-    const res = await axios.post<loginResponse>(`${process.env.NEXT_PUBLIC_API_HOST}/login`, {
-      email,
-      password,
-    });
-    if (res.status === 200) {
+    if (res && res.status === 200) {
       const { user, jwt } = res.data;
       onLogin(user, jwt);
       return router.push('/dashboard');
+    }
+    if (err) {
+      setError(err);
     }
   };
 
@@ -46,6 +54,7 @@ export default function Login() {
             value={password}
             onChange={onSetPassword}
           />
+          {error && <p>{error}</p>}
           <StyledButton backgroundColor="midGreen">Login</StyledButton>
         </StyledForm>
       </StyledContainer>

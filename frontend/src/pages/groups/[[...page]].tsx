@@ -2,9 +2,13 @@ import React from 'react';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
 import { Layout } from '@components/global/layout/Layout';
-import { groups } from '@utils/types/Group';
 import { Pagination } from '@components/global/Pagination';
 import { GroupList } from '@components/groups/GroupList';
+
+// TODO in this file
+// CHANGE THE MESS DEFINED DOWN BELOW
+// DO ERROR HANDLING ON THE FETCH
+// CHANGE DON'T LOOK FOR "/all" just look for /1 and change the header to /1 instead of /all
 
 const Dashboard = ({
   groups,
@@ -14,8 +18,7 @@ const Dashboard = ({
   return (
     <Layout title="All groups">
       <h1>All groups</h1>
-      {(groups.length && <GroupList groups={groups} title="Newest groups" />) || 'No groups'}
-
+      {groups.length && <GroupList groups={groups} />}
       <Pagination count={count} limit={6} page={page} />
     </Layout>
   );
@@ -31,12 +34,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     else page = page[0];
   } else page = '1';
 
-  const res = await authenticatedRequest(authToken).get<[groups, number]>(
+  const res = await authenticatedRequest(authToken).get<Response>(
     `http://api:3080/get-groups/${page}`
   );
 
   // Something should happen if we get 0 results obv.
-
   const [groups, count] = res.data;
 
   return {
@@ -45,3 +47,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default Dashboard;
+
+export interface ListGroupData {
+  groupId: number;
+  groupTitle: string;
+  groupSubject: string;
+  createdById: number;
+  createdByName: string;
+}
+
+type Response = [ListGroupData[], number];
