@@ -7,7 +7,7 @@ body {
 * {
   box-sizing: border-box;
   font-size: 18px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1,
@@ -21,6 +21,9 @@ h6 {
 
 h1 {
   font-size: 2rem;
+}
+h2 {
+  font-size: 1.6rem;
 }
 
 h3 {

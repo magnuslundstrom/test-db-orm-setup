@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors, spacing, fontSizes, widths } from '@variables';
 
 export const StyledHeader = styled.header`
-  background-color: ${colors.midBlue};
+  background-color: ${colors.darkBlue};
 
   a {
     text-decoration: none;

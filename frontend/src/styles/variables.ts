@@ -1,28 +1,26 @@
 export const colors = {
-  // blue
-  midBlue: '#0251d6',
-  darkBlue: '#25277a',
-
-  // red
-  lightRed: '#fa7a5b',
-  midRed: '#fb0246',
-  darkRed: '#92364e',
-  // green
-  lightGreen: '#52e0c0',
-  midGreen: '#03bd85',
-  darkGreen: '#047857',
-  // white
   white: '#fff',
 
-  // gray
+  lightBlue: '#cfdaf4',
+  midBlue: '',
+  darkBlue: '#2f3756',
+
+  midPurple: '#6371db',
+
+  lightRed: '#fa7a5b',
+  midRed: '#FC8181',
+  darkRed: '#92364e',
+
+  lightGreen: '#baf4ba',
+  midGreen: '#46cc8c',
+  darkGreen: '#047857',
+
   lightGray: '#edf1f4',
-  midGray: '#bcbcbc',
-  darkGray: '#35465a',
+  midGray: '#a9a9a9',
 
-  // orange
-  midOrange: '#fa7a5b',
+  midOrange: '#ff9f7d',
+  darkOrange: '#ffd0b0',
 
-  // utilities
   darkBg: '#0d1117',
 };
 

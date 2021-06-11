@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import app from '../app';
 import { allRoutes } from '../routes/allRoutes';
-import { Connection, createConnection, EntityMetadata, getConnection } from 'typeorm';
+import { Connection, createConnection, EntityMetadata } from 'typeorm';
 import { UserSetup } from './userSetup/userSetup';
 import { GroupSetup } from './groupSetup/groupSetup';
 
@@ -38,8 +38,9 @@ class TestSetup {
         await this.connection.manager.query(sql);
       }
     } catch (err) {
-      // console.log(err); // This gives foreign_key truncate error
-      // that doesn't seem to cause any issues but is very annoying.
+      // UNCOMMENT THIS FOR FURTHER DEBUGGING
+      // console.log(err);
+      // right now it gives an truncate table error that I can't seem to solve, but it is however not causing troubles
     }
   }
 

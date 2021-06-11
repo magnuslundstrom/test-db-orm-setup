@@ -38,7 +38,7 @@ export const UserContextProvider: React.FC<{}> = (props) => {
         );
         setUser(response.data);
       } catch (err) {
-        router.push('/login');
+        router.push('/');
       }
     };
 
