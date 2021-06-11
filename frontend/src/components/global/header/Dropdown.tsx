@@ -33,6 +33,7 @@ export const StyledDropdownTrigger = styled.div`
 
   &:hover {
     .dropdown-menu {
+      z-index: 100;
       display: flex;
     }
   }
@@ -40,7 +41,7 @@ export const StyledDropdownTrigger = styled.div`
 
 export const StyledDropdownMenu = styled.div`
   position: absolute;
-  background-color: ${colors.midBlue};
+  background-color: ${colors.darkBlue};
   padding: 10px;
   width: 200px;
   display: none;

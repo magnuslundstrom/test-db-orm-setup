@@ -33,7 +33,7 @@ const Box = styled.div`
 `;
 
 const PageButton = styled.a<{ isCurrentPage: boolean }>`
-  background-color: ${({ isCurrentPage }) => (isCurrentPage ? colors.darkGray : colors.midGray)};
+  background-color: ${({ isCurrentPage }) => (isCurrentPage ? colors.darkBlue : colors.midBlue)};
   color: ${colors.white};
   margin-top: ${spacing.lg};
   margin-right: ${spacing.md};

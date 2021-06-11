@@ -50,7 +50,7 @@ const ContentLayout = styled.div`
   min-height: calc(100vh - 90px);
   justify-content: space-between;
   main {
-    max-width: ${widths.lg};
+    width: ${widths.lg};
     margin: ${spacing.lg} auto;
   }
 `;
