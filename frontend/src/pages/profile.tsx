@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';

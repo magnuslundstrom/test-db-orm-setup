@@ -21,8 +21,12 @@ export const Footer: React.FC<{}> = () => {
 };
 
 const Wrapper = styled.div`
+  margin-top: 30px;
   background-color: ${colors.lightGray};
   padding: ${spacing.lg} 0px;
+  align-self: flex-end;
+  justify-self: flex-end;
+  width: 100%;
 `;
 
 const StyledFooter = styled.footer`

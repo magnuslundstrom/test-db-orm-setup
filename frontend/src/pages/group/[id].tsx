@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSidePropsContext } from 'next';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { iGroup } from '@utils/types/Group';
 
 const Group: React.FC<{ group: iGroup }> = ({ group: { title, subject } }) => {

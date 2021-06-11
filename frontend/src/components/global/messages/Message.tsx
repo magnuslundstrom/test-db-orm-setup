@@ -6,7 +6,7 @@ type Status = 'success' | 'error';
 type StyledProps = { status: Status };
 
 const StyledMessage = styled.p<StyledProps>`
-  color: ${(props) => (props.status === 'success' ? colors.green500 : colors.red400)};
+  color: ${(props) => (props.status === 'success' ? colors.midRed : colors.midGreen)};
 `;
 
 interface Props {

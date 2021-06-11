@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetServerSidePropsContext } from 'next';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { useUser } from '@hooks/useUser';
 import { IdeaBox } from '@components/global/ideabox/IdeaBox';
 

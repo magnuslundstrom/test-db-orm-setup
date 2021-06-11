@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { NotificationBox } from '@components/global/messages/NotificationBox';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';

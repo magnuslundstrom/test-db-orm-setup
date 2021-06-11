@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
-import { Layout } from 'src/components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { StyledForm, StyledButton, StyledFormInput, StyledContainer } from '@elements';
 
 interface State {

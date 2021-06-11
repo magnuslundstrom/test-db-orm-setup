@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { Pagination } from '@components/global/Pagination';
 import { GroupList } from '@components/groups/GroupList';
 

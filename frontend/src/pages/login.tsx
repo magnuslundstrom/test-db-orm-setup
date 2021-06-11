@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useUser } from '@utils/hooks/useUser';
-import { Layout } from '@components/global/layout/Layout';
+import { Layout } from '@components/global/Layout';
 import { loginResponse } from '@utils/types/loginResponse';
 import router, { useRouter } from 'next/router';
 import { StyledButton, StyledForm, StyledFormInput, StyledContainer } from '@elements';
