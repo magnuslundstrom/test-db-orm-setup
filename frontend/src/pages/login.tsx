@@ -3,8 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/Layout';
 import { loginResponse } from '@utils/types/loginResponse';
-import router, { useRouter } from 'next/router';
-import { StyledButton, StyledForm, StyledFormInput, StyledContainer } from '@elements';
+import { useRouter } from 'next/router';
+import { Button, StyledForm, StyledFormInput, StyledContainer } from '@elements';
 import { tryCatch } from '@utils/helperFunctions/tryCatch';
 
 export default function Login() {
@@ -55,7 +55,7 @@ export default function Login() {
             onChange={onSetPassword}
           />
           {error && <p>{error}</p>}
-          <StyledButton backgroundColor="midGreen">Login</StyledButton>
+          <Button backgroundColor="midGreen">Login</Button>
         </StyledForm>
       </StyledContainer>
     </Layout>

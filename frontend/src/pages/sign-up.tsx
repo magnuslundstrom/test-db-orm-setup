@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from '@components/global/Layout';
-import { StyledForm, StyledButton, StyledFormInput, StyledContainer } from '@elements';
+import { StyledForm, Button, StyledFormInput, StyledContainer } from '@elements';
 
 interface State {
   email: string;
@@ -74,7 +74,7 @@ export default function SignUp() {
             value={state.password}
             onChange={onPasswordChange}
           />
-          <StyledButton backgroundColor="midGreen">Sign up</StyledButton>
+          <Button backgroundColor="midGreen">Sign up</Button>
         </StyledForm>
       </StyledContainer>
     </Layout>

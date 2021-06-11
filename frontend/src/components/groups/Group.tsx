@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { StyledGroup } from 'src/styles/blocks/cards/groups';
 import { ListGroupData } from 'src/pages/groups/[[...page]]';
-import { colors, spacing } from '@variables';
+import { colors, spacing, shadow, rounded, transitions } from '@variables';
+import { Button } from '@elements';
 
 export const Group: React.FC<ListGroupData> = ({
   createdById,
@@ -12,9 +12,9 @@ export const Group: React.FC<ListGroupData> = ({
   groupTitle,
 }) => {
   return (
-    <StyledGroup.Card>
+    <Card>
       <div>
-        <StyledGroup.Header>{groupTitle}</StyledGroup.Header>
+        <Header>{groupTitle}</Header>
       </div>
       <ProfileBar>
         <i className="fas fa-user"></i>
@@ -24,11 +24,29 @@ export const Group: React.FC<ListGroupData> = ({
       <p>{groupSubject}</p>
 
       <Link href={`/group/${groupId}`}>
-        <StyledGroup.Button backgroundColor="midGreen">Read more</StyledGroup.Button>
+        <Button backgroundColor="midGreen">Read more</Button>
       </Link>
-    </StyledGroup.Card>
+    </Card>
   );
 };
+const Card = styled.div`
+  box-shadow: ${shadow.md};
+  padding: ${spacing.md};
+  border-radius: ${rounded.sm};
+  background-color: ${colors.lightGray};
+  position: relative;
+  transition: transform ${transitions.medium};
+
+  &:hover {
+    transform: translateY(-${spacing.xs});
+  }
+`;
+
+const Header = styled.h3`
+  border-bottom: 1px solid ${colors.midGray};
+  display: inline-block;
+  margin: ${spacing.sm} 0px;
+`;
 
 const ProfileBar = styled.div`
   margin-top: ${spacing.md};
