@@ -15,7 +15,7 @@ export const SponsorList: React.FC<Props> = ({ sponsors }) => {
   const { start, changeDirection } = useSlider(3, sponsors.length);
 
   const renderSponsors = (sponsors: iSponsors) =>
-    sponsors.map((sponsor) => <Sponsor sponsor={sponsor} />);
+    sponsors.map((sponsor, idx) => <Sponsor sponsor={sponsor} key={idx} />);
 
   return (
     <>
