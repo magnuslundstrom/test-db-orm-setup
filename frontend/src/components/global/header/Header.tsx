@@ -16,9 +16,6 @@ export const Header: React.FC<{}> = () => {
   const loggedInMenu = (
     <>
       <li>
-        <Link href="/dashboard">Dashboard</Link>
-      </li>
-      <li>
         <Dropdown buttonText="Groups" urls={groupUrls} />
       </li>
       <li>
@@ -44,7 +41,7 @@ export const Header: React.FC<{}> = () => {
   return (
     <HeaderWrapper>
       <div>
-        <Link href="/">StudyPartnr</Link>
+        <Link href={user ? '/dashboard' : '/'}>StudyPartnr</Link>
         <div>
           <ul>{user ? loggedInMenu : loggedOutMenu}</ul>
         </div>
