@@ -4,6 +4,16 @@ import axios from 'axios';
 import { useJwt } from '@utils/hooks/useJwt';
 import { RealisticUserFromServer } from '@utils/types/User';
 
+/*
+CONCERNS OF THIS CONTEXT
+-> Why should this attempt to login, when we in reality are already logging in in the serverside render.
+-> In reality we should never really need this, because we will do checks for auth in the getServerSideProps
+
+THOUGHTS: 
+This is really more of a CSR approach
+Should probably be considered deprecated even tho it still exists within the application
+*/
+
 interface UserContext {
   jwt: string;
   user: RealisticUserFromServer;
@@ -38,7 +48,7 @@ export const UserContextProvider: React.FC<{}> = (props) => {
         );
         setUser(response.data);
       } catch (err) {
-        router.push('/');
+        if (isAuthenticatedRoute(router.pathname)) router.push('/login');
       }
     };
 
@@ -63,4 +73,15 @@ export const UserContextProvider: React.FC<{}> = (props) => {
     onLogout,
   };
   return <UserContext.Provider value={value} {...props} />;
+};
+
+const isAuthenticatedRoute = (pathname: string) => {
+  switch (pathname) {
+    case '/login':
+    case '/sign-up':
+    case '/':
+      return false;
+    default:
+      return true;
+  }
 };
