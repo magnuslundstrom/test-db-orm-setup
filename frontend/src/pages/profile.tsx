@@ -3,7 +3,7 @@ import { Layout } from '@components/global/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
-import { StyledForm, StyledButton, StyledFormInput, StyledLabel } from '@elements';
+import { StyledForm, Button, StyledFormInput, StyledLabel } from '@elements';
 import { IdeaBox } from '@components/global/ideabox/IdeaBox';
 export default function Profile() {
   const { user } = useUser();
@@ -65,7 +65,7 @@ export default function Profile() {
           value={state.password}
           onChange={onPasswordChange}
         />
-        <StyledButton backgroundColor="midGreen">Submit update</StyledButton>
+        <Button backgroundColor="midGreen">Submit update</Button>
       </StyledForm>
 
       <IdeaBox ideas={['Add profile image', 'Add Google Authentication']} />

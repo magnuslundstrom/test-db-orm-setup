@@ -1,5 +1,5 @@
-export { StyledButton } from './StyledButtons';
-export { StyledForm } from './StyledForms';
-export { StyledFormInput } from './StyledInputs';
-export { StyledContainer } from './StyledContainers';
-export { StyledLabel } from './StyledLabels';
+export { Button } from './Buttons';
+export { Form } from './Forms';
+export { Input } from './Inputs';
+export { Container } from '../blocks/Container';
+export { Label } from './Labels';

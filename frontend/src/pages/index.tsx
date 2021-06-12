@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       <Layout title="Front page">
         <div>
-          <Grid columns={2} gap="xl">
+          <Grid columns="1fr 1fr" gap="xl">
             <article>
               <h1>Find studypartners around the globe</h1>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi a, quibusdam earum,

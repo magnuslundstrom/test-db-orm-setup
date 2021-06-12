@@ -3,6 +3,6 @@ import styled from 'styled-components';
 
 export const StyledNotificationBox = styled.div`
   p {
-    color: ${colors.green500};
+    color: ${colors.midGreen};
   }
 `;
