@@ -5,7 +5,7 @@ interface Props {
   width: keyof typeof widths;
 }
 
-export const StyledForm = styled.form<Props>`
+export const Form = styled.form<Props>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => widths[width]};
