@@ -25,6 +25,7 @@ export default (router: Router, connection: Connection) => {
             groups.id AS groupId,
             groups.title as groupTitle,
             groups.subject AS groupSubject,
+            groups.createdAt as groupCreatedAt,
             createdBy.id as createdById,
             CONCAT(createdBy.firstName, ' ', createdBy.lastName) AS createdByName
             `

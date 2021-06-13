@@ -3,7 +3,7 @@ import { Layout } from '@components/global/Layout';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
-import { StyledForm, Button, StyledFormInput, StyledLabel } from '@elements';
+import { Form, Button, Input, Label } from '@elements';
 import { IdeaBox } from '@components/global/ideabox/IdeaBox';
 export default function Profile() {
   const { user } = useUser();
@@ -26,9 +26,9 @@ export default function Profile() {
   return (
     <Layout title="Profile">
       <h1>Edit your profile</h1>
-      <StyledForm width="sm">
-        <StyledLabel htmlFor="firstName">First name</StyledLabel>
-        <StyledFormInput
+      <Form width="sm">
+        <Label htmlFor="firstName">First name</Label>
+        <Input
           type="text"
           id="firstName"
           name="firstName"
@@ -36,8 +36,8 @@ export default function Profile() {
           onChange={onFirstNameChange}
         />
 
-        <StyledLabel htmlFor="lastName">Last name</StyledLabel>
-        <StyledFormInput
+        <Label htmlFor="lastName">Last name</Label>
+        <Input
           type="text"
           id="lastName"
           name="lastName"
@@ -45,20 +45,14 @@ export default function Profile() {
           onChange={onLastNameChange}
         />
 
-        <StyledLabel htmlFor="email">Email</StyledLabel>
-        <StyledFormInput
-          type="text"
-          id="email"
-          name="email"
-          value={state.email}
-          onChange={onEmailChange}
-        />
+        <Label htmlFor="email">Email</Label>
+        <Input type="text" id="email" name="email" value={state.email} onChange={onEmailChange} />
 
-        <StyledLabel htmlFor="age">Age</StyledLabel>
-        <StyledFormInput type="text" id="age" name="age" value={state.age} onChange={onAgeChange} />
+        <Label htmlFor="age">Age</Label>
+        <Input type="text" id="age" name="age" value={state.age} onChange={onAgeChange} />
 
-        <StyledLabel htmlFor="password">Password</StyledLabel>
-        <StyledFormInput
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="text"
           id="password"
           name="password"
@@ -66,7 +60,7 @@ export default function Profile() {
           onChange={onPasswordChange}
         />
         <Button backgroundColor="midGreen">Submit update</Button>
-      </StyledForm>
+      </Form>
 
       <IdeaBox ideas={['Add profile image', 'Add Google Authentication']} />
     </Layout>

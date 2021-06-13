@@ -4,7 +4,7 @@ import { NotificationBox } from '@components/global/messages/NotificationBox';
 import { useUser } from '@hooks/useUser';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { authenticatedRequest } from '@utils/requests/authenticatedRequest';
-import { StyledForm, StyledButton, StyledFormInput, StyledLabel } from 'src/styles/elements';
+import { Form, Button, Input, Label } from 'src/styles/elements';
 
 interface State {
   title: string;
@@ -53,18 +53,13 @@ export default function NewGroup() {
   return (
     <Layout title="Start new study group">
       <h1>Start a new study group</h1>
-      <StyledForm onSubmit={onSubmit} width="sm">
-        <StyledLabel htmlFor="title">Title</StyledLabel>
-        <StyledFormInput type="text" placeholder="Title" onChange={onTitleChange} value={title} />
-        <StyledLabel htmlFor="subject">Subject</StyledLabel>
-        <StyledFormInput
-          type="text"
-          placeholder="Subject"
-          onChange={onSubjectChange}
-          value={subject}
-        />
-        <StyledButton backgroundColor="midGreen">Submit</StyledButton>
-      </StyledForm>
+      <Form onSubmit={onSubmit} width="sm">
+        <Label htmlFor="title">Title</Label>
+        <Input type="text" placeholder="Title" onChange={onTitleChange} value={title} />
+        <Label htmlFor="subject">Subject</Label>
+        <Input type="text" placeholder="Subject" onChange={onSubjectChange} value={subject} />
+        <Button backgroundColor="midGreen">Submit</Button>
+      </Form>
       <NotificationBox message={message} />
     </Layout>
   );

@@ -10,7 +10,7 @@ export const Header: React.FC<{}> = () => {
   const groupUrls = [
     { url: '/groups/new', text: 'New group' },
     { url: '/groups/my', text: 'My groups' },
-    { url: '/groups/all', text: 'All groups' },
+    { url: '/groups/1', text: 'All groups' },
   ];
 
   const loggedInMenu = (

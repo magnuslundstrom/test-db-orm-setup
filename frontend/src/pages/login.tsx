@@ -4,7 +4,8 @@ import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/Layout';
 import { loginResponse } from '@utils/types/loginResponse';
 import { useRouter } from 'next/router';
-import { Button, StyledForm, StyledFormInput, StyledContainer } from '@elements';
+import { Button, Form, Input } from '@elements';
+import { Container } from '@elements';
 import { tryCatch } from '@utils/helperFunctions/tryCatch';
 
 export default function Login() {
@@ -44,20 +45,21 @@ export default function Login() {
 
   return (
     <Layout title="Login">
-      <StyledContainer width="sm">
+      <Container width="sm">
         <h1>Login</h1>
-        <StyledForm onSubmit={onSubmit} width="sm">
-          <StyledFormInput type="text" placeholder="Email" value={email} onChange={onSetEmail} />
-          <StyledFormInput
+        <Form onSubmit={onSubmit} width="sm">
+          <Input type="text" placeholder="Email" value={email} onChange={onSetEmail} marginBottom />
+          <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={onSetPassword}
+            marginBottom
           />
           {error && <p>{error}</p>}
           <Button backgroundColor="midGreen">Login</Button>
-        </StyledForm>
-      </StyledContainer>
+        </Form>
+      </Container>
     </Layout>
   );
 }

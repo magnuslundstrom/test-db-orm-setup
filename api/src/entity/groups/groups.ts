@@ -14,6 +14,9 @@ export class Groups {
   @Column()
   subject: string;
 
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
   @ManyToOne(() => Users, {
     onDelete: 'CASCADE',
   })

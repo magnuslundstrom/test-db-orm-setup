@@ -24,13 +24,24 @@ const Dashboard = ({
   );
 };
 
+export interface ListGroupData {
+  groupId: number;
+  groupTitle: string;
+  groupSubject: string;
+  groupCreatedAt: Date;
+  createdById: number;
+  createdByName: string;
+}
+
+type Response = [ListGroupData[], number];
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const authToken = context.req.cookies['JWT'] || '';
 
   // Change this mess later 🥴
   let page = context.query.page;
   if (page) {
-    if (page[0] === 'all' || page[0] === '0') page = '1';
+    if (page[0] === '0') page = '1';
     else page = page[0];
   } else page = '1';
 
@@ -47,13 +58,3 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default Dashboard;
-
-export interface ListGroupData {
-  groupId: number;
-  groupTitle: string;
-  groupSubject: string;
-  createdById: number;
-  createdByName: string;
-}
-
-type Response = [ListGroupData[], number];

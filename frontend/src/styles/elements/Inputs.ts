@@ -6,10 +6,10 @@ const BaseInput = styled.input`
 `;
 
 interface Props {
-  marginBottom: boolean;
+  marginBottom?: boolean;
 }
 
 /** Basic form input field with optional marginBottom */
 export const Input = styled(BaseInput)<Props>`
-  margin-bottom: ${({ marginBottom }) => (marginBottom ? spacing.md : '0px')};
+  margin-bottom: ${({ marginBottom }) => (!marginBottom ? spacing.md : '0px')};
 `;

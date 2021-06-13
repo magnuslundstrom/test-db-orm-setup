@@ -1,5 +1,6 @@
 export const colors = {
   white: '#fff',
+  black: '#000',
 
   lightBlue: '#cfdaf4',
   midBlue: '#3B82F6',
@@ -20,8 +21,6 @@ export const colors = {
 
   midOrange: '#ff9f7d',
   darkOrange: '#ffd0b0',
-
-  darkBg: '#0d1117',
 };
 
 export const widths = {
