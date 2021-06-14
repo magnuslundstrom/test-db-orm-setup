@@ -4,6 +4,10 @@ WORKDIR /usr/src/app/api
 
 COPY package*.json ./
 
-RUN npm install 
+RUN npm install
 
-CMD ["npm", "run","dev"]
+RUN mkdir public
+RUN mkdir public/profile-images
+RUN chmod 755 public/profile-images
+
+CMD ["npm", "run", "dev"]

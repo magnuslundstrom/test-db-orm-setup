@@ -1,0 +1,1 @@
+export { profileImagePath } from './profileImagePath';

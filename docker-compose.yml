@@ -37,6 +37,7 @@ services:
       - 3080:3080
     volumes:
       - ./api:/usr/src/app/api
+      - images:/usr/src/app/api/public
     depends_on:
       - db
       - test_db
@@ -50,3 +51,4 @@ services:
 
 volumes:
   db-volume:
+  images:
