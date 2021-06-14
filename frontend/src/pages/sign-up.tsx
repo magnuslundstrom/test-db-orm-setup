@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from '@components/global/Layout';
-import { StyledForm, Button, StyledFormInput, StyledContainer } from '@elements';
+import { Form, Button, Input, Container, H1, Label } from '@elements';
+import { ProfileImageWithChange } from '../components/ProfileImageWithChange';
 
 interface State {
   email: string;
@@ -10,15 +11,21 @@ interface State {
   lastName: string;
   password: string;
   age: string;
+  image: string;
+  imageString: string;
 }
+
+const defaultImageString = '/images/blank-profile.png';
 
 export default function SignUp() {
   const [state, setState] = useState<State>({
     email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    age: '',
+    firstName: 'a',
+    lastName: 'a',
+    password: 'a',
+    age: '13',
+    image: '',
+    imageString: defaultImageString,
   });
 
   const factory = onChangeFactory(state, setState);
@@ -44,39 +51,67 @@ export default function SignUp() {
     }
   };
 
+  const onImageReset = () => {
+    setState({ ...state, image: '', imageString: defaultImageString });
+    console.log(state);
+  };
+
+  const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target && e.target.files) {
+      const image = e.target.files[0];
+      if (image) {
+        const imageString = URL.createObjectURL(image);
+        setState({
+          ...state,
+          image: e.target.value,
+          imageString,
+        });
+        return;
+      }
+    }
+    onImageReset();
+    console.log(state);
+  };
+
   return (
     <Layout title="Sign up">
-      <StyledContainer width="sm">
-        <h1>Sign up</h1>
-        <StyledForm onSubmit={onSubmit} width="sm">
-          <StyledFormInput
-            type="text"
-            placeholder="Email"
-            value={state.email}
-            onChange={onEmailChange}
+      <Container width="sm" backgroundColor="lightGray" padding="xl" marginTop="lg">
+        <H1 marginBottom="lg">Sign up</H1>
+        <Form onSubmit={onSubmit} width="sm">
+          <ProfileImageWithChange
+            image={state.image}
+            imageString={state.imageString}
+            onImageChange={onImageChange}
+            onImageReset={onImageReset}
           />
-          <StyledFormInput
+          <Label>Email</Label>
+          <Input type="text" placeholder="Email" value={state.email} onChange={onEmailChange} />
+          <Label>First name</Label>
+          <Input
             type="text"
             placeholder="First name"
             value={state.firstName}
             onChange={onFirstNameChange}
           />
-          <StyledFormInput
+          <Label>Last name</Label>
+          <Input
             type="text"
             placeholder="Last name"
             value={state.lastName}
             onChange={onLastNameChange}
           />
-          <StyledFormInput type="text" placeholder="Age" value={state.age} onChange={onAgeChange} />
-          <StyledFormInput
+          <Label>Age</Label>
+          <Input type="text" placeholder="Age" value={state.age} onChange={onAgeChange} />
+          <Label>Password</Label>
+          <Input
             type="password"
             placeholder="Password"
             value={state.password}
             onChange={onPasswordChange}
           />
           <Button backgroundColor="midGreen">Sign up</Button>
-        </StyledForm>
-      </StyledContainer>
+        </Form>
+      </Container>
     </Layout>
   );
 }

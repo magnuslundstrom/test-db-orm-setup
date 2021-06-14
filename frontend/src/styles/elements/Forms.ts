@@ -8,5 +8,5 @@ interface Props {
 export const Form = styled.form<Props>`
   display: flex;
   flex-direction: column;
-  width: ${({ width }) => widths[width]};
+  max-width: ${({ width }) => widths[width]};
 `;

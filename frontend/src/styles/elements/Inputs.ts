@@ -11,5 +11,6 @@ interface Props {
 
 /** Basic form input field with optional marginBottom */
 export const Input = styled(BaseInput)<Props>`
+  max-width: 100%;
   margin-bottom: ${({ marginBottom }) => (!marginBottom ? spacing.md : '0px')};
 `;

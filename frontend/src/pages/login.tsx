@@ -4,7 +4,7 @@ import { useUser } from '@utils/hooks/useUser';
 import { Layout } from '@components/global/Layout';
 import { loginResponse } from '@utils/types/loginResponse';
 import { useRouter } from 'next/router';
-import { Button, Form, Input } from '@elements';
+import { Button, Form, Input, Label, H1 } from '@elements';
 import { Container } from '@elements';
 import { tryCatch } from '@utils/helperFunctions/tryCatch';
 
@@ -45,17 +45,13 @@ export default function Login() {
 
   return (
     <Layout title="Login">
-      <Container width="sm">
-        <h1>Login</h1>
+      <Container width="sm" backgroundColor="lightGray" padding="xl" marginTop="lg">
+        <H1 marginBottom="md">Login</H1>
         <Form onSubmit={onSubmit} width="sm">
-          <Input type="text" placeholder="Email" value={email} onChange={onSetEmail} marginBottom />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={onSetPassword}
-            marginBottom
-          />
+          <Label>Email</Label>
+          <Input type="text" placeholder="Email" value={email} onChange={onSetEmail} />
+          <Label>Password</Label>
+          <Input type="password" placeholder="Password" value={password} onChange={onSetPassword} />
           {error && <p>{error}</p>}
           <Button backgroundColor="midGreen">Login</Button>
         </Form>

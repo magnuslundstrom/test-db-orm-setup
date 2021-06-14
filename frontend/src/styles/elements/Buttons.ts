@@ -15,4 +15,5 @@ export const Button = styled(BaseButton)<{ backgroundColor: keyof typeof colors 
   &:hover {
     background-color: ${({ backgroundColor }) => findHoverColor(backgroundColor)};
   }
+  font-weight: bold;
 `;
