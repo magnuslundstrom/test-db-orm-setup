@@ -3,7 +3,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useUser } from '@hooks/useUser';
 import { Dropdown } from './Dropdown';
+import { ProfileImage } from '@components/profileImage/ProfileImage';
 import { colors, spacing, fontSizes, widths } from '@variables';
+import { profileImageRootUrl } from 'src/constants';
 
 export const Header: React.FC<{}> = () => {
   const { user, onLogout } = useUser();
@@ -19,11 +21,13 @@ export const Header: React.FC<{}> = () => {
         <Dropdown buttonText="Groups" urls={groupUrls} />
       </li>
       <li>
-        <Link href="/profile">Profile</Link>
+        <Link href="/profile">
+          <ProfileImage imageSrc={user?.profileImage as string} />
+        </Link>
       </li>
-      <li>
+      {/* <li>
         <button onClick={onLogout}>Logout</button>
-      </li>
+      </li> */}
     </>
   );
 
@@ -51,7 +55,10 @@ export const Header: React.FC<{}> = () => {
 };
 
 export const HeaderWrapper = styled.header`
-  background-color: ${colors.darkBlue};
+  background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.darkBlue};
+  width: ${widths.lg};
+  margin: 0 auto;
 
   a {
     text-decoration: none;
@@ -67,12 +74,13 @@ export const HeaderWrapper = styled.header`
   button,
   span,
   a {
-    color: ${colors.white};
+    color: ${colors.darkBlue};
   }
 
   ul {
     list-style-type: none;
     display: flex;
+    align-items: center;
 
     li {
       &:hover: {

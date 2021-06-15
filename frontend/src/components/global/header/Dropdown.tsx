@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { colors, spacing } from '@variables';
+import { colors, shadow, spacing } from '@variables';
 
 interface Props {
   urls: {
@@ -41,12 +41,13 @@ export const StyledDropdownTrigger = styled.div`
 
 export const StyledDropdownMenu = styled.div`
   position: absolute;
-  background-color: ${colors.darkBlue};
+  background-color: ${colors.white};
   padding: 10px;
   width: 200px;
   display: none;
   flex-direction: column;
   z-index: 100;
+  box-shadow: ${shadow.md};
 
   a,
   span {
@@ -56,7 +57,6 @@ export const StyledDropdownMenu = styled.div`
     padding: ${spacing.sm};
 
     &:hover {
-      background-color: ${colors.darkBlue};
     }
   }
 `;

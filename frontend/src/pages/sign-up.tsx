@@ -3,7 +3,7 @@ import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from '@components/global/Layout';
 import { Form, Button, Input, Container, H1, Label } from '@elements';
-import { ProfileImageWithChange } from '../components/profileImages/ProfileImageWithChange';
+import { ProfileImageWithChange } from '../components/profileImage/ProfileImageWithChange';
 
 interface State {
   email: string;
