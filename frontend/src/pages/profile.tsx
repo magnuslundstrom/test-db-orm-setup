@@ -5,6 +5,7 @@ import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
 import { Form, Button, Input, Label } from '@elements';
 import { IdeaBox } from '@components/global/ideabox/IdeaBox';
+import styled from 'styled-components';
 export default function Profile() {
   const { user } = useUser();
   const [state, setState] = useState<EditAbleUser>({
@@ -13,6 +14,7 @@ export default function Profile() {
     age: user?.age || '',
     email: user?.email || '',
     password: '',
+    profileImage: user?.profileImage || '',
   });
 
   const factory = onChangeFactory(state, setState);
@@ -26,6 +28,7 @@ export default function Profile() {
   return (
     <Layout title="Profile">
       <h1>Edit your profile</h1>
+      <ProfileImage src={'http://localhost:3080/profile-images/' + state.profileImage} />
       <Form width="sm">
         <Label htmlFor="firstName">First name</Label>
         <Input
@@ -66,3 +69,10 @@ export default function Profile() {
     </Layout>
   );
 }
+
+const ProfileImage = styled.img`
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  object-fit: cover;
+`;

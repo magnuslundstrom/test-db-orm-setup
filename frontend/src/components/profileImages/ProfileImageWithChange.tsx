@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { colors, fontSizes, transitions } from '@variables';
 
 interface Props {
-  image: string;
   imageString: string;
   onImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onImageReset: () => void;
@@ -11,14 +10,12 @@ interface Props {
 
 export const ProfileImageWithChange: React.FC<Props> = ({
   imageString,
-  image,
   onImageChange,
   onImageReset,
 }) => {
   const [displayCross, setDisplayCross] = useState(false);
 
   const extendedOnImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     onImageChange(e);
     setDisplayCross(true);
   };
@@ -42,7 +39,6 @@ export const ProfileImageWithChange: React.FC<Props> = ({
           type="file"
           onChange={extendedOnImageChange}
           accept=".jpg, .jpeg, .png"
-          value={image}
         />
       </Wrapper>
     </div>

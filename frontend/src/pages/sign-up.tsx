@@ -3,7 +3,7 @@ import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from '@components/global/Layout';
 import { Form, Button, Input, Container, H1, Label } from '@elements';
-import { ProfileImageWithChange } from '../components/ProfileImageWithChange';
+import { ProfileImageWithChange } from '../components/profileImages/ProfileImageWithChange';
 
 interface State {
   email: string;
@@ -11,8 +11,8 @@ interface State {
   lastName: string;
   password: string;
   age: string;
-  image: string;
   imageString: string;
+  image: File | null;
 }
 
 const defaultImageString = '/images/blank-profile.png';
@@ -24,7 +24,7 @@ export default function SignUp() {
     lastName: 'a',
     password: 'a',
     age: '13',
-    image: '',
+    image: null,
     imageString: defaultImageString,
   });
 
@@ -38,22 +38,23 @@ export default function SignUp() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!state.image) return;
+    const formData = new FormData();
+    formData.append('image', state.image);
+    formData.append('firstName', state.firstName);
+    formData.append('lastName', state.lastName);
+    formData.append('age', state.age);
+    formData.append('email', state.email);
+    formData.append('password', state.password);
     try {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_API_HOST}/sign-up`, {
-          ...state,
-        })
-        .then((data) => {
-          console.log(data);
-        });
+      axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/sign-up`, formData).then((data) => {});
     } catch (e) {
       console.log(e);
     }
   };
 
   const onImageReset = () => {
-    setState({ ...state, image: '', imageString: defaultImageString });
-    console.log(state);
+    setState({ ...state, image: null, imageString: defaultImageString });
   };
 
   const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,14 +64,13 @@ export default function SignUp() {
         const imageString = URL.createObjectURL(image);
         setState({
           ...state,
-          image: e.target.value,
+          image,
           imageString,
         });
         return;
       }
     }
     onImageReset();
-    console.log(state);
   };
 
   return (
@@ -79,7 +79,6 @@ export default function SignUp() {
         <H1 marginBottom="lg">Sign up</H1>
         <Form onSubmit={onSubmit} width="sm">
           <ProfileImageWithChange
-            image={state.image}
             imageString={state.imageString}
             onImageChange={onImageChange}
             onImageReset={onImageReset}
