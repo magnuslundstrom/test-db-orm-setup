@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Layout } from '@components/global/Layout';
 import { SponsorList } from '../components/sponsors/SponsorList';
 import { Grid } from '@blocks/Grid';
+import { H2 } from '@elements';
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
             padding: '30px',
           }}
         >
-          <h2>Sponsors that make this possible</h2>
+          <H2 marginBottom="xl">Sponsors that make this possible</H2>
           <SponsorList
             sponsors={[
               {
