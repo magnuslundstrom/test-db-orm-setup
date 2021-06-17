@@ -22,7 +22,7 @@ export const Header: React.FC<{}> = () => {
         <Dropdown triggerElement={groupTriggerElement}>
           <Link href="/groups/new">New group</Link>
           <Link href="/groups/my">My groups</Link>
-          <Link href="/groups/all">All groups</Link>
+          <Link href="/groups/1">All groups</Link>
         </Dropdown>
       </li>
       <li>
