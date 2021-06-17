@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Layout } from '@components/global/Layout';
+import styled from 'styled-components';
+import { profileImageRootUrl } from '@constants';
 import { useUser } from '@hooks/useUser';
-import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { EditAbleUser } from '@utils/types/User';
+import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
+
+import { Layout } from '@components/global/Layout';
 import { Form, Button, Input, Label } from '@elements';
 import { IdeaBox } from '@components/global/ideabox/IdeaBox';
-import styled from 'styled-components';
+
 export default function Profile() {
   const { user } = useUser();
   const [state, setState] = useState<EditAbleUser>({
@@ -18,7 +21,6 @@ export default function Profile() {
   });
 
   const factory = onChangeFactory(state, setState);
-
   const onFirstNameChange = factory('firstName');
   const onLastNameChange = factory('lastName');
   const onAgeChange = factory('age');
@@ -28,7 +30,7 @@ export default function Profile() {
   return (
     <Layout title="Profile">
       <h1>Edit your profile</h1>
-      <ProfileImage src={'http://localhost:3080/profile-images/' + state.profileImage} />
+      <ProfileImage src={profileImageRootUrl + state.profileImage} />
       <Form width="sm">
         <Label htmlFor="firstName">First name</Label>
         <Input

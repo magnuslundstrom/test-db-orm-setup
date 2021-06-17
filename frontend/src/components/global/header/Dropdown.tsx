@@ -1,33 +1,20 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 import { colors, shadow, spacing } from '@variables';
 
 interface Props {
-  urls: {
-    url: string;
-    text: string;
-  }[];
-  buttonText: string;
+  triggerElement: JSX.Element;
 }
 
-export const Dropdown: React.FC<Props> = ({ urls, buttonText }) => {
-  const renderUrls = urls.map((url, idx) => (
-    <Link href={url.url} key={idx}>
-      {url.text}
-    </Link>
-  ));
-
+export const Dropdown: React.FC<Props> = ({ triggerElement, children }) => {
   return (
-    <StyledDropdownTrigger>
-      <span>
-        {buttonText} <i className="fas fa-angle-down"></i>
-      </span>
-      <StyledDropdownMenu className="dropdown-menu">{renderUrls}</StyledDropdownMenu>
-    </StyledDropdownTrigger>
+    <DropdownTrigger>
+      <span>{triggerElement}</span>
+      <DropdownMenu className="dropdown-menu">{children}</DropdownMenu>
+    </DropdownTrigger>
   );
 };
 
-export const StyledDropdownTrigger = styled.div`
+const DropdownTrigger = styled.div`
   display: inline-block;
   position: relative;
 
@@ -39,7 +26,7 @@ export const StyledDropdownTrigger = styled.div`
   }
 `;
 
-export const StyledDropdownMenu = styled.div`
+const DropdownMenu = styled.div`
   position: absolute;
   background-color: ${colors.white};
   padding: 10px;
@@ -50,13 +37,15 @@ export const StyledDropdownMenu = styled.div`
   box-shadow: ${shadow.md};
 
   a,
-  span {
+  span,
+  button {
     margin-left: 0px;
     border-bottom: 1px solid white;
     margin-bottom: 10px;
     padding: ${spacing.sm};
 
     &:hover {
+      text-decoration: underline;
     }
   }
 `;

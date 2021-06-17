@@ -5,29 +5,32 @@ import { useUser } from '@hooks/useUser';
 import { Dropdown } from './Dropdown';
 import { ProfileImage } from '@components/profileImage/ProfileImage';
 import { colors, spacing, fontSizes, widths } from '@variables';
-import { profileImageRootUrl } from 'src/constants';
 
 export const Header: React.FC<{}> = () => {
   const { user, onLogout } = useUser();
-  const groupUrls = [
-    { url: '/groups/new', text: 'New group' },
-    { url: '/groups/my', text: 'My groups' },
-    { url: '/groups/1', text: 'All groups' },
-  ];
+  const groupTriggerElement = (
+    <>
+      Groups <i className="fas fa-angle-down"></i>{' '}
+    </>
+  );
+
+  const profileTriggerElement = <ProfileImage imageSrc={user?.profileImage as string} />;
 
   const loggedInMenu = (
     <>
       <li>
-        <Dropdown buttonText="Groups" urls={groupUrls} />
+        <Dropdown triggerElement={groupTriggerElement}>
+          <Link href="/groups/new">New group</Link>
+          <Link href="/groups/my">My groups</Link>
+          <Link href="/groups/all">All groups</Link>
+        </Dropdown>
       </li>
       <li>
-        <Link href="/profile">
-          <ProfileImage imageSrc={user?.profileImage as string} />
-        </Link>
+        <Dropdown triggerElement={profileTriggerElement}>
+          <Link href="/profile">Profile</Link>
+          <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+        </Dropdown>
       </li>
-      {/* <li>
-        <button onClick={onLogout}>Logout</button>
-      </li> */}
     </>
   );
 
@@ -99,4 +102,8 @@ export const HeaderWrapper = styled.header`
     max-width: ${widths.lg};
     margin: 0 auto;
   }
+`;
+
+const LogoutButton = styled.button`
+  text-align: left;
 `;
