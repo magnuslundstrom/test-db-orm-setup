@@ -5,5 +5,6 @@ export const userData = [
     lastName: 'Larsen',
     email: 'K@K.dk',
     password: 'abc',
+    profileImage: '',
   },
 ];

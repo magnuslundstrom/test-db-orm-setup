@@ -15,14 +15,7 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
     try {
       if (this.connection) {
         const repo = this.connection.getRepository(Users);
-        const { firstName, lastName, age, email, password } = this.data[0];
-        const user = Users.createNewInstance({
-          firstName,
-          lastName,
-          age,
-          email,
-          password,
-        });
+        const user = Users.createNewInstance({ ...this.data[0] });
         const savedUser = await repo.save(user);
         return savedUser;
       }
@@ -41,12 +34,6 @@ export class UserSetup extends BaseSetupAbstract<typeof userData[0]> {
   }
 
   public static createNewInstanceWithoutDB() {
-    return Users.createNewInstance({
-      firstName: 'a',
-      lastName: 'a',
-      age: 13,
-      email: 'a@a.dk',
-      password: 'a',
-    });
+    return Users.createNewInstance({ ...userData[0] });
   }
 }
