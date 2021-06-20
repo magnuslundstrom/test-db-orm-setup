@@ -1,9 +1,16 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import axios from 'axios';
 import { onChangeFactory } from '@utils/helperFunctions/onChangeFactory';
 import { Layout } from '@components/global/Layout';
-import { Form, Button, Input, Container, H1, Label } from '@elements';
+import { Form, Button, Container, H1 } from '@elements';
 import { ProfileImageWithChange } from '../components/profileImage/ProfileImageWithChange';
+import { InputWithErrorMessage } from '@components/global/inputs/InputWithErrorMessage';
+import {
+  lengthValidation,
+  numberValidation,
+  emailValidation,
+} from '@utils/helperFunctions/validations';
+import { generateFormData } from '@utils/helperFunctions/generateFormData';
 
 interface State {
   email: string;
@@ -13,6 +20,7 @@ interface State {
   age: string;
   imageString: string;
   image: File | null;
+  error: string;
 }
 
 const defaultImageString = '/images/blank-profile.png';
@@ -26,30 +34,33 @@ export default function SignUp() {
     age: '13',
     image: null,
     imageString: defaultImageString,
+    error: '',
   });
 
-  const factory = onChangeFactory(state, setState);
+  const [disabled, setDisabled] = useState(true);
 
+  useEffect(() => {
+    let everythingOK = false;
+    if (lengthValidation(1, 20)(state.firstName)) everythingOK = false;
+    console.log(lengthValidation(1, 20)(state.firstName));
+  }, [state]);
+
+  const factory = onChangeFactory(state, setState);
   const onEmailChange = factory('email');
   const onFirstNameChange = factory('firstName');
   const onLastNameChange = factory('lastName');
   const onPasswordChange = factory('password');
   const onAgeChange = factory('age');
+  const onError = factory('error');
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!state.image) return;
-    const formData = new FormData();
-    formData.append('image', state.image);
-    formData.append('firstName', state.firstName);
-    formData.append('lastName', state.lastName);
-    formData.append('age', state.age);
-    formData.append('email', state.email);
-    formData.append('password', state.password);
+    if (state.image === null) return;
+    const formData = generateFormData(state as any); // doesn't work without assertion
     try {
-      axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/sign-up`, formData).then((data) => {});
+      axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/sign-up`, formData);
     } catch (e) {
-      console.log(e);
+      onError(e.message);
     }
   };
 
@@ -83,32 +94,54 @@ export default function SignUp() {
             onImageChange={onImageChange}
             onImageReset={onImageReset}
           />
-          <Label>Email</Label>
-          <Input type="text" placeholder="Email" value={state.email} onChange={onEmailChange} />
-          <Label>First name</Label>
-          <Input
-            type="text"
+          <InputWithErrorMessage
+            errorHandler={emailValidation}
+            errorMessage="Provide a valid email"
+            placeholder="Email"
+            label
+            value={state.email}
+            type="email"
+            onChange={onEmailChange}
+          />
+          <InputWithErrorMessage
+            errorHandler={lengthValidation(1, 20)}
+            errorMessage="First name must be between 1 and 20 characters"
             placeholder="First name"
+            label
             value={state.firstName}
+            type="text"
             onChange={onFirstNameChange}
           />
-          <Label>Last name</Label>
-          <Input
-            type="text"
+          <InputWithErrorMessage
+            errorHandler={lengthValidation(1, 20)}
+            errorMessage="Last name must be between 1 and 20 characters"
             placeholder="Last name"
+            label
             value={state.lastName}
+            type="text"
             onChange={onLastNameChange}
           />
-          <Label>Age</Label>
-          <Input type="text" placeholder="Age" value={state.age} onChange={onAgeChange} />
-          <Label>Password</Label>
-          <Input
-            type="password"
+          <InputWithErrorMessage
+            errorHandler={numberValidation}
+            errorMessage="You must be between 1-110 years old"
+            placeholder="Age"
+            label
+            value={state.age}
+            type="text"
+            onChange={onAgeChange}
+          />
+          <InputWithErrorMessage
+            errorHandler={lengthValidation(1, 20)}
+            errorMessage="Password must be between 1 and 20 characters"
             placeholder="Password"
+            label
             value={state.password}
+            type="password"
             onChange={onPasswordChange}
           />
-          <Button backgroundColor="midGreen">Sign up</Button>
+          <Button backgroundColor="midGreen" disabled={disabled}>
+            Sign up
+          </Button>
         </Form>
       </Container>
     </Layout>

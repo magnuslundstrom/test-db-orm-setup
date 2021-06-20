@@ -6,14 +6,22 @@ const BaseButton = styled.button`
   border-radius: ${rounded.sm};
   color: ${colors.white};
   border: 0px;
-  padding: ${spacing.sm} ${spacing.lg};
+  padding: ${spacing.md} ${spacing.lg};
 `;
 
-export const Button = styled(BaseButton)<{ backgroundColor: keyof typeof colors }>`
+interface ButtonProps {
+  backgroundColor: keyof typeof colors;
+}
+
+export const Button = styled(BaseButton)<ButtonProps>`
   background-color: ${({ backgroundColor }) => colors[backgroundColor]};
   transition: background-color ${transitions.medium};
   &:hover {
     background-color: ${({ backgroundColor }) => findHoverColor(backgroundColor)};
+  }
+
+  &:disabled {
+    background-color: ${colors.lightBlue};
   }
   font-weight: bold;
 `;

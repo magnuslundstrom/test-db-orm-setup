@@ -31,6 +31,7 @@ export interface ListGroupData {
   groupCreatedAt: Date;
   createdById: number;
   createdByName: string;
+  createdByProfileImage: string;
 }
 
 type Response = [ListGroupData[], number];
