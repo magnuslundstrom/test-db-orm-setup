@@ -45,8 +45,6 @@ export const ProfileImageWithChange: React.FC<Props> = ({
   );
 };
 
-// PROBLEM THAT WE RAN INTO BEFORE DINNER:
-// THE PROBLEM IS THAT WE NEED TO PASS A FUNCTION THAT CAN ACTUALLY TAKE THE IMAGE OF THE INPUT ON CHANGE AND SET IT, USE THE FUNCTION THAT WE HAVE ALREADY MADE BEFORE
 const Wrapper = styled.div`
   position: relative;
   display: flex;
