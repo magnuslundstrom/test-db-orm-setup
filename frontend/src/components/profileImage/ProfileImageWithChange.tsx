@@ -2,6 +2,12 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { colors, fontSizes, transitions } from '@variables';
 
+/*
+--- DEPRECATED ---
+Not used anymore as it was easier to just implement with the react-form-hook some custom code. 
+See how the sign up form is implemented and extract to this component if needed in the future.
+*/
+
 interface Props {
   imageString: string;
   onImageChange: (e: ChangeEvent<HTMLInputElement>) => void;

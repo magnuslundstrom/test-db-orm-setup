@@ -14,12 +14,16 @@ interface SignUpProperties {
   age: string;
 }
 
+/*
+  Should also implement unique email check. Hopefully via the mysql unique "property".
+*/
+
 const upload = multer();
 
 export default (router: Router, connection: Connection) => {
   router.post(
     '/sign-up',
-    upload.single('image'),
+    upload.single('profileImage'),
     async (req: RequestWithBody<SignUpProperties>, res) => {
       try {
         const fileType = req.file.mimetype.split('/')[1];

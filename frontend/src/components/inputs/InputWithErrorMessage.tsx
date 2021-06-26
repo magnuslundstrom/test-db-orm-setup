@@ -1,7 +1,12 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { Label, Input } from '@elements';
 import styled from 'styled-components';
 import { colors, spacing } from '@variables';
+
+/* 
+--- DEPRECATED --- 
+DON'T USE THIS COMPONENT ANY MORE. USE REACT-HOOK-FORM 
+*/
 
 type Event = React.ChangeEvent<HTMLInputElement>;
 

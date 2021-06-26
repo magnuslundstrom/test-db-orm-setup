@@ -1,10 +1,10 @@
 type FormDataInputs = string | File;
 
-export const generateFormData = <T>(data: { [Key in keyof T]: FormDataInputs }) => {
+export const generateFormData = <T>(data: T) => {
   const formData = new FormData();
 
   for (let key in data) {
-    formData.append(key, data[key]);
+    formData.append(key, data[key] as any);
   }
 
   return formData;

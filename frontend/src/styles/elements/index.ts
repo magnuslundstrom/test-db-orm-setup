@@ -4,3 +4,4 @@ export { Input } from './Inputs';
 export { Container } from '../blocks/Container';
 export { Label } from './Labels';
 export { H1, H2, H3, H4 } from './Header';
+export { FormErrorMessage } from './Errors';
