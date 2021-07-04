@@ -15,4 +15,9 @@ describe('findHoverColor helper function tests', () => {
     const result = findHoverColor('darkGreen');
     expect(result).toBe('#047857');
   });
+
+  test('getting a hoverColor for "white" should return white', () => {
+    const result = findHoverColor('white');
+    expect(result).toBe('#fff');
+  });
 });
