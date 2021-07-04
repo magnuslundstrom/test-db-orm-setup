@@ -27,11 +27,13 @@ export const LoginForm: React.FC<Props> = () => {
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     handleSubmit(async (data) => {
-      try {
-        const x = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, data);
-        console.log(x);
-      } catch (err) {
-        console.log(err.response);
+      const [res, err] = await tryCatch(axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, data));
+      if (err) {
+        setError('No account with provided credentials');
+        return;
+      } else {
+        console.log(res);
+        // router.push('/dashboard')
       }
     })();
   };
@@ -56,7 +58,7 @@ export const LoginForm: React.FC<Props> = () => {
       <Button backgroundColor="midGreen" disabled={!isValid}>
         Login
       </Button>
-      {error && <FormErrorMessage>{error}</FormErrorMessage>}
+      {error && <FormErrorMessage marginTop="lg">{error}</FormErrorMessage>}
     </Form>
   );
 };
