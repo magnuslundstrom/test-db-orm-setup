@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors, spacing, rounded, transitions } from '@variables';
-import { findHoverColor } from '@utils/helperFunctions/findHoverColor';
+import { findHoverColor } from '@utils/helperFunctions/findHoverColor/findHoverColor';
 
 const BaseButton = styled.button`
   border-radius: ${rounded.sm};
