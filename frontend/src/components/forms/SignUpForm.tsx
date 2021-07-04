@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Button, Form, Input, Label, FormErrorMessage } from '@elements';
-import { emailValidationRegex } from '@utils/helperFunctions/validations/emailValidation';
+import { emailValidationRegex } from '@utils/validations/emailValidation';
 import { tryCatch } from '@utils/helperFunctions/tryCatch';
-import { numberValidationRegex } from '@utils/helperFunctions/validations/numberValidation';
+import { numberValidationRegex } from '@utils/validations/numberValidation';
 import { defaultImageString } from '@constants';
 import { generateFormData } from '@utils/helperFunctions/generateFormData';
 
@@ -84,7 +84,6 @@ export const SignUpForm = () => {
           minLength: { value: 4, message: 'First name must be atleast 4 characters' },
         })}
         id="firstName"
-        value="james"
       />
       <FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
 
@@ -94,7 +93,6 @@ export const SignUpForm = () => {
           required: 'Last name is required',
           minLength: { value: 4, message: 'Last name must be atleast 4 characters' },
         })}
-        value="james"
       />
       <FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
 
@@ -108,7 +106,6 @@ export const SignUpForm = () => {
           },
         })}
         id="age"
-        value="12"
       />
       <FormErrorMessage>{errors.age && errors.age.message}</FormErrorMessage>
 
@@ -122,7 +119,6 @@ export const SignUpForm = () => {
           },
         })}
         id="email"
-        value="a@a.dk"
       />
       <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
 
@@ -132,7 +128,6 @@ export const SignUpForm = () => {
           required: 'Password is required',
         })}
         id="password"
-        value="123"
         type="password"
       />
       <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>

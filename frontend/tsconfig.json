@@ -7,7 +7,7 @@
       "@hooks/*": ["src/utils/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@variables": ["src/styles/variables"],
-      "@blocks/*": ["src/styles/blocks/*"],
+      "@blocks": ["src/styles/blocks"],
       "@elements": ["src/styles/elements"],
       "@constants": ["src/constants"]
     },

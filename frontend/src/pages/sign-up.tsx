@@ -1,6 +1,7 @@
 import { Layout } from '@components/global/Layout';
-import { Container, H1 } from '@elements';
-import { SignUpForm } from '@components/forms/SignUpForm';
+import { H1 } from '@elements';
+import { Container } from '@blocks';
+import { SignUpForm } from '../components/forms/SignUpForm';
 
 export default function SignUp() {
   return (

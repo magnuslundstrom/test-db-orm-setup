@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ListGroupData } from 'src/pages/groups/[[...page]]';
 import { colors, spacing, shadow, rounded, transitions, fontSizes } from '@variables';
 import { Button } from '@elements';
-import { DateNumericDMYFormatter } from '@utils/helperFunctions/DateFormatters';
+import { numericDMY } from '@utils/helperFunctions/dateFormatters/numericDMY';
 import { stringCutter } from '@utils/helperFunctions/stringCutter';
 
 export const Group: React.FC<ListGroupData> = ({
@@ -20,7 +20,7 @@ export const Group: React.FC<ListGroupData> = ({
       <SubHeaderBar>
         <p>
           <i className="far fa-clock"></i>
-          {DateNumericDMYFormatter(groupCreatedAt)}
+          {numericDMY(groupCreatedAt)}
         </p>
         <Link href={`/users/${createdById}`}>
           <a>
