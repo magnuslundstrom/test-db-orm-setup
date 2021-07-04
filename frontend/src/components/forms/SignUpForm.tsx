@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Button, Form, Input, Label, FormErrorMessage } from '@elements';
 import { emailValidationRegex } from '@utils/validations/emailValidation';
-import { tryCatch } from '@utils/helperFunctions/tryCatch';
+import { tryCatch } from '@utils/helperFunctions/tryCatch/tryCatch';
 import { numberValidationRegex } from '@utils/validations/numberValidation';
 import { defaultImageString } from '@constants';
-import { generateFormData } from '@utils/helperFunctions/generateFormData';
+import { generateFormData } from '@utils/helperFunctions/generateFormData/generateFormData';
 
 // Still needs to implement error check and error message after submit.
 // Also make use of label rather than the file input button

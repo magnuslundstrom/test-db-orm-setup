@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { tryCatch } from '@utils/helperFunctions/tryCatch';
+import { useUser } from '@hooks/useUser';
+import { tryCatch } from '@utils/helperFunctions/tryCatch/tryCatch';
 import { Label, Form, Button, Input, FormErrorMessage } from '../../../styles/elements';
 import { emailInputOptions, passwordInputOptions } from '../inputOptions';
 
@@ -22,18 +23,19 @@ export const LoginForm: React.FC<Props> = () => {
   } = useForm<FormState>({
     mode: 'onTouched',
   });
-  // const router = useRouter();
+
+  const router = useRouter();
+  const { onLogin } = useUser();
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     handleSubmit(async (data) => {
       const [res, err] = await tryCatch(axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, data));
       if (err) {
-        setError('No account with provided credentials');
-        return;
+        return setError('No account with provided credentials');
       } else {
-        console.log(res);
-        // router.push('/dashboard')
+        onLogin(res?.data.user, res?.data.jwt);
+        router.push('/dashboard');
       }
     })();
   };
