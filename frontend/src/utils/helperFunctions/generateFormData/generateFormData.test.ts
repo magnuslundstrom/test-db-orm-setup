@@ -28,4 +28,10 @@ describe('generateFormData helperfunction test', () => {
     expect(formData.has('file')).toBeTruthy();
     expect(formData.get('file') instanceof File).toBeTruthy();
   });
+
+  test('empty object', () => {
+    const testObj = {};
+    const formData = generateFormData(testObj);
+    expect(formData instanceof FormData).toBeTruthy();
+  });
 });
