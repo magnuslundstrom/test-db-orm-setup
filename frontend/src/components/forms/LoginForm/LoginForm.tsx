@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { tryCatch } from '@utils/helperFunctions/tryCatch';
+import { useUser } from '@hooks/useUser';
+import { tryCatch } from '@utils/helperFunctions/tryCatch/tryCatch';
 import { Label, Form, Button, Input, FormErrorMessage } from '../../../styles/elements';
 import { emailInputOptions, passwordInputOptions } from '../inputOptions';
 
@@ -22,16 +23,19 @@ export const LoginForm: React.FC<Props> = () => {
   } = useForm<FormState>({
     mode: 'onTouched',
   });
-  // const router = useRouter();
+
+  const router = useRouter();
+  const { onLogin } = useUser();
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     handleSubmit(async (data) => {
-      try {
-        const x = await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, data);
-        console.log(x);
-      } catch (err) {
-        console.log(err.response);
+      const [res, err] = await tryCatch(axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, data));
+      if (err) {
+        return setError('No account with provided credentials');
+      } else {
+        onLogin(res?.data.user, res?.data.jwt);
+        router.push('/dashboard');
       }
     })();
   };
@@ -56,7 +60,7 @@ export const LoginForm: React.FC<Props> = () => {
       <Button backgroundColor="midGreen" disabled={!isValid}>
         Login
       </Button>
-      {error && <FormErrorMessage>{error}</FormErrorMessage>}
+      {error && <FormErrorMessage marginTop="lg">{error}</FormErrorMessage>}
     </Form>
   );
 };

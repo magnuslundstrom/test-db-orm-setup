@@ -1,5 +1,10 @@
 import { colors } from '@variables';
 
+/**
+ * Automatically get a darker shade of a color primarily used to get hoverColors dynamically
+ * @param color
+ * @returns a hoverColor
+ */
 export function findHoverColor(color: keyof typeof colors) {
   const index = firstUpperCaseLetterIndex(color);
   const baseColor = color.slice(index, color.length);

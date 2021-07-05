@@ -2,6 +2,7 @@ import { screen, render, fireEvent, waitFor, waitForElementToBeRemoved } from '@
 import { LoginForm } from './LoginForm';
 
 // FIGURE OUT A WAY TO TEST IF THE LOGIN FUNCTIONALITY WORK
+// thoughts: we can't really have a database version of a user that we use only for testing purposes, CAN WE?
 
 // email related vars
 const emailLabelText = 'Email';

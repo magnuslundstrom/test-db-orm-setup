@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCookie } from '@utils/helperFunctions/getCookie';
+import { getCookie } from '@utils/helperFunctions/cookies/getCookie';
 
 const JWT_KEY = 'JWT';
 

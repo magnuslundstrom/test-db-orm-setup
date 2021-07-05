@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { ListGroupData } from 'src/pages/groups/[[...page]]';
-import { colors, spacing, shadow, rounded, transitions, fontSizes } from '@variables';
+import { colors, spacing, shadow, rounded, transitions } from '@variables';
 import { Button } from '@elements';
 import { numericDMY } from '@utils/helperFunctions/dateFormatters/numericDMY';
-import { stringCutter } from '@utils/helperFunctions/stringCutter';
+import { stringCutter } from '@utils/helperFunctions/stringCutter/stringCutter';
 
 export const Group: React.FC<ListGroupData> = ({
   createdById,
