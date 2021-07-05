@@ -5,6 +5,7 @@
       "@contexts/*": ["src/utils/contexts/*"],
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/utils/hooks/*"],
+      "@helperFunctions/*": ["src/utils/helperFunctions/*"],
       "@utils/*": ["src/utils/*"],
       "@variables": ["src/styles/variables"],
       "@blocks": ["src/styles/blocks"],

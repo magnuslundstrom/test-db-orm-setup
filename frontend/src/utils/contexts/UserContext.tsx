@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useJwt } from '@utils/hooks/useJwt';
+import { useJwt } from '@hooks/useJwt/useJwt';
 import { RealisticUserFromServer } from '@utils/types/User';
 
 /*

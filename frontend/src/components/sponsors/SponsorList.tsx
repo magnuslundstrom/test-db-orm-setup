@@ -1,5 +1,5 @@
 import { Sponsor, iSponsor } from './Sponsor';
-import { useSlider } from '@utils/hooks/useSlider';
+import { useSlider } from '@hooks/useSlider/useSlider';
 import { Grid } from '@blocks';
 
 type iSponsors = iSponsor[];
