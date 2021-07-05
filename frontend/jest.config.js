@@ -9,6 +9,7 @@ module.exports = {
     '^@contexts/(.*)$': resolve(__dirname, './src/utils/contexts/$1'),
     '^@components/(.*)$': resolve(__dirname, './src/components/$1'),
     '^@hooks/(.*)$': resolve(__dirname, './src/utils/hooks/$1'),
+    '^@helperFunctions/(.*)$': resolve(__dirname, './src/utils/helperFunctions/$1'),
     '^@utils/(.*)$': resolve(__dirname, './src/utils/$1'),
     '^@variables': resolve(__dirname, './src/styles/variables'),
     '^@blocks': resolve(__dirname, './src/styles/blocks'),
